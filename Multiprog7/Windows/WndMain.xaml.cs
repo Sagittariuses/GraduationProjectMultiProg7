@@ -52,19 +52,22 @@ namespace Multiprog7
                         }
 
 
-                        //FrameMain.Content = new Pages.PageMain();
+                        FrameMain.Content = new Pages.PageMain();
                         SimpleFlag = true;
                         break;
                     }
                 }
                 if (!SimpleFlag)
                 {
-                    FrameMain.Content = new Pages.PageMain();
+                    FrameMain.Content = new Pages.PageMain(); 
+                } else
+                {
+                    FrameMain.Content = new Pages.PageAddLiftBlock();
                 }
             }
             else
             {
-                FrameMain.Content = new Pages.PageConnect();
+                FrameMain.Content = new Pages.PageAddLiftBlock();
             }
         }
 
@@ -76,6 +79,15 @@ namespace Multiprog7
         private void BtnCloseBox_Click(object sender, RoutedEventArgs e)
         {
             Process.GetCurrentProcess().Kill();
+        }
+
+        private void dragMe(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                DragMove();
+            }
+            catch { }
         }
     }
 }

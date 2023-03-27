@@ -56,11 +56,11 @@ namespace Multiprog7.Windows
 
         #endregion
 
-        #region First FW events
+         #region First FW events
         private void BtnChooseFwFilePlusFirst_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opd = new OpenFileDialog();
-            opd.Filter = $"Файлы прошивки ({PageMain.FileExt}) | {PageMain.FileExt}";
+            //opd.Filter = $"Файлы прошивки ({PageMain.FileExt}) | {PageMain.FileExt}";
             opd.Title = "Выбор прошивки";
 
             Nullable<bool> result = opd.ShowDialog();
@@ -103,14 +103,19 @@ namespace Multiprog7.Windows
                     FWVer += ch + ".";
 
                 }
-                FWVer = FWVer.Substring(0,FWVer.Length-1).Trim();
-                Height = HeightSecond;
-                GridChooseFwFirst.Visibility = Visibility.Hidden;
-                GridFwFirst.Visibility = Visibility.Visible;
-                LbFwFilenameFirst.Content = opd.SafeFileName;
-                LbFwVerFirst.Content= FWVer;
-                LbFwDateFirst.Content = File.GetCreationTime(opd.FileName).ToShortDateString();
-                PageMain.FwFromManualMode = new Multiprog7.Classes.FWForDevice(Convert.ToByte(FWVer.Replace(".", "")), null, opd.FileName, opd.SafeFileName);
+                try
+                {
+                    FWVer = FWVer.Substring(0, FWVer.Length - 1).Trim();
+                    Height = HeightSecond;
+                    GridChooseFwFirst.Visibility = Visibility.Hidden;
+                    GridFwFirst.Visibility = Visibility.Visible;
+                    LbFwFilenameFirst.Content = opd.SafeFileName;
+                    LbFwVerFirst.Content = FWVer;
+                    LbFwDateFirst.Content = File.GetCreationTime(opd.FileName).ToShortDateString();
+                    PageMain.FwFromManualMode = new Multiprog7.Classes.FWForDevice(Convert.ToByte(FWVer.Replace(".", "")), null, opd.FileName, opd.SafeFileName);
+                }
+                catch { }
+               
             }
         }
 
@@ -127,7 +132,7 @@ namespace Multiprog7.Windows
         private void BtnChooseFwFilePlusSecond_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opd = new OpenFileDialog();
-            opd.Filter = PageMain.FileExt;
+            //opd.Filter = PageMain.FileExt;
 
             Nullable<bool> result = opd.ShowDialog();
 
@@ -197,7 +202,7 @@ namespace Multiprog7.Windows
         private void BtnChooseFwFilePlusThird_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opd = new OpenFileDialog();
-            opd.Filter = $"Файлы прошивки ({PageMain.FileExt}) | {PageMain.FileExt}";
+            //opd.Filter = $"Файлы прошивки ({PageMain.FileExt}) | {PageMain.FileExt}";
             opd.Title = "Выбор прошивки";
 
             Nullable<bool> result = opd.ShowDialog();
@@ -259,8 +264,8 @@ namespace Multiprog7.Windows
         private void BtnClearFirmwareThird_Click(object sender, RoutedEventArgs e)
         {
             PageMain.FileFW = null;
-            GridChooseFwSecond.Visibility = Visibility.Visible;
-            GridFwSecond.Visibility = Visibility.Hidden;
+            GridChooseFwThird.Visibility = Visibility.Visible;
+            GridFwThird.Visibility = Visibility.Hidden;
             ChangeHeight();
         }
 
@@ -281,6 +286,15 @@ namespace Multiprog7.Windows
             {
                 Height = HeightFirst;
             }
+        }
+
+        private void dragMe(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                DragMove();
+            }
+            catch { }
         }
     }
 }

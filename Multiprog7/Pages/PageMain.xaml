@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Multiprog7.Pages"
+      xmlns:fwCode="clr-namespace:Multiprog7.Classes"
       xmlns:Microsoft_Windows_Themes="clr-namespace:Multiprog7.Model"
+
       mc:Ignorable="d" 
       Loaded="Page_Loaded"
       d:DesignHeight="672" d:DesignWidth="1024"
@@ -32,107 +34,168 @@
                 CornerRadius="15">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="721"></ColumnDefinition>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="157*"></ColumnDefinition>
+                            <ColumnDefinition Width="157*"></ColumnDefinition>
+                            <ColumnDefinition Width="157*"></ColumnDefinition>
+                            <ColumnDefinition Width="120*"></ColumnDefinition>
+                            <ColumnDefinition Width="193*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label 
                             x:Name="LbState"
-                            FontWeight="Bold"
                             Content="Анализ"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
-                            FontSize="14"
-                            Margin="10,20,0,20"
-                            Foreground="#486FEF" Grid.ColumnSpan="2" Width="303"/>
+                            Style="{StaticResource LbHeader}"
+                            Grid.ColumnSpan="2" 
+                            Width="303" Height="28" Margin="10,20,0,20"/>
                         <Grid Grid.Column="4">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="93*"></ColumnDefinition>
+                                <ColumnDefinition Width="80*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label 
                                 Grid.Column="0"
-                                FontWeight="Bold"
                                 Content="Осталось:"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                FontSize="14"
-                                Margin="0,0,0,10"
-                                Foreground="#486FEF"/>
+                                Style="{StaticResource LbHeader}" 
+                                Width="76" Margin="10,20" Height="28"
+                                
+                                />
                             <Label 
                                 x:Name="LbRemainingTime"
-                                Grid.Column="1"
                                 FontWeight="Bold"
-                                Content="{Binding TimeView}"
+                                Grid.Column="1"
+                                Content="2ч 12мин"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 FontSize="14"
-                                Margin="0,0,0,10"
-                                Foreground="#486FEF"/>
+                                Foreground="#486FEF" Height="28" Margin="0,20" Width="79"/>
                         </Grid>
+                        <!-- Content="{Binding TimeView}" -->
 
-                        <Label
-                            x:Name="LbProgressPercent"
+                        <Label x:Name="LbProgressPercent"
                             Grid.Column="2"
                             FontWeight="Bold"
                             Content="0%"
                             VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                             HorizontalAlignment="Center"
                             FontSize="14"
-                            Margin="0,0,0,10"
                             Foreground="#486FEF"/>
 
-
-                        <Border 
-                            Grid.ColumnSpan="5"
-                            Height="12"
-                            CornerRadius="15"
-                            VerticalAlignment="Bottom"
-                            Margin="10">
-                            <ProgressBar 
-                                x:Name="PbMain"
-                                Maximum="1"
+                        <ProgressBar  x:Name="PbMain"
+                                Maximum="10"
                                 Value="0"
-                                Foreground="#486FEF"
-                                ValueChanged="PbMain_ValueChanged">
-                            </ProgressBar>
-                        </Border>
+                                Style="{StaticResource CustomProgressBar}"
+                                Grid.ColumnSpan="5"
+                                Height="12"
+                                Width="700"
+                                VerticalAlignment="Bottom"
+                                Margin="10,0,10,10"
+                                ValueChanged="PbMain_ValueChanged"/>
+
                     </Grid>
 
 
-
-                    <Grid Grid.Column="1" HorizontalAlignment="Right">
+                    <Grid  Grid.Column="1" HorizontalAlignment="Left" Width="263">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="204*"></ColumnDefinition>
+                            <ColumnDefinition Width="59*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Grid.Column="0"
-                            FontWeight="Bold"
-                            FontSize="16"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Foreground="#486FEF">
-                                Количество
-                                <LineBreak/>
-                                устройств:
-                        </TextBlock>
-                        <Label 
-                            x:Name="LbDevCount"
-                            Grid.Column="1"
-                            FontWeight="Bold"
-                            Content="0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            FontSize="26"
-                            Foreground="#486FEF"/>
+                        <Grid Grid.Column="0" HorizontalAlignment="Left" Width="204" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Grid.Column="0"
+                                FontWeight="Normal"
+                                FontSize="14"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Visibility="Visible"
+                                Foreground="#4F4F4F" Height="36"  Width="81" Margin="0,16">
+                                    Обновлений
+                                    <LineBreak/>
+                                    доступно
+                            </TextBlock>
+                            <TextBlock 
+                                Grid.Column="0"
+                                FontWeight="Normal"
+                                FontSize="14"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Visibility="Collapsed"
+                                Foreground="#4F4F4F" Height="36"  Width="81" Margin="0,16">
+                                    Обновлений
+                                    <LineBreak/>
+                                    загружено
+                            </TextBlock>
+                            <Label 
+                                x:Name="LbDevCount"
+                                Grid.Column="1"
+                                FontWeight="Bold"
+                                Content="999"
+                                FontFamily="/Resources/#Inter"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                FontSize="40"
+                                Foreground="#6FCF97"/>
+                        </Grid>
+
+                        <Button
+                            Background="{x:Null}"
+                            BorderThickness="0"
+                            HorizontalAlignment="Right"  Width="28" Grid.Column="1" Margin="0,0,20,0" >
+                            <Path Data="M2.16667 0.833374C3.17919 0.833374 4 1.65419 4 2.66671V2.66671C4 3.67923 3.17919 4.50004 2.16667 4.50004L1.83333 4.50004C0.820811 4.50004 8.17969e-07 3.67923 8.66252e-07 2.66671V2.66671C9.14534e-07 1.65419 0.820812 0.833374 1.83333 0.833374L2.16667 0.833374ZM2.16667 8.16671C3.17919 8.16671 4 8.98752 4 10V10C4 11.0126 3.17919 11.8334 2.16667 11.8334L1.83333 11.8334C0.820811 11.8334 4.68278e-07 11.0126 5.1656e-07 10V10C5.64843e-07 8.98752 0.820811 8.16671 1.83333 8.16671L2.16667 8.16671ZM2.16667 15.5C3.17919 15.5 4 16.3209 4 17.3334V17.3334C4 18.3459 3.17919 19.1667 2.16667 19.1667L1.83333 19.1667C0.820811 19.1667 1.18587e-07 18.3459 1.66869e-07 17.3334V17.3334C2.15152e-07 16.3209 0.820811 15.5 1.83333 15.5L2.16667 15.5Z" 
+                                  Fill="#486FEF"/>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Click">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
+                                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                                        </BooleanAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="ContextMenu">
+                                        <Setter.Value>
+                                            <ContextMenu>
+                                                <ContextMenu.Template>
+                                                    <ControlTemplate>
+                                                        <Border BorderBrush="#486FEF" BorderThickness="1" Width="150" CornerRadius="10" Background="White">
+                                                            <StackPanel Orientation="Vertical">
+                                                                <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button Content="Разработчику" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#486FEF"/>
+                                                                </Border>
+                                                                <Border BorderThickness="0" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button Content="Журнал работы" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
+                                                                </Border>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </ContextMenu.Template>
+                                            </ContextMenu>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
                     </Grid>
 
                 </Grid>
@@ -140,37 +203,166 @@
 
         </Grid>
 
+        <Frame x:Name="FrameChartsMain" Grid.Column="0" Grid.Row="3" Width="733" NavigationUIVisibility="Hidden" ></Frame>
+
+        <!--Lists -->
         <Border Grid.Column="0"
-                Grid.Row="3"
-                Grid.RowSpan="3"
-                Height="538"
+                Grid.Row="5"
                 Width="733"
                 Background="#FFFFFF"
                 CornerRadius="15">
-            <Grid VerticalAlignment="Bottom" Height="528" >
+            <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label 
-                    Grid.Row="0"
-                    Content="Обзор устройств"
-                    FontWeight="Bold"
-                        FontSize="16"
-                        Foreground="#486FEF"
-                       />
-                <ListView
-                    x:Name="LVCanDevList"
-                    Grid.Row="1"
-                    BorderThickness="0"
-                    SelectionChanged="LVCanDevList_SelectionChanged">
+                
+                <!--Header detail-->
+                <Grid Grid.Row="0">
+                    <Label 
+                    Content="Детализация"
+                    Style="{StaticResource LbHeader}"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20 0">
+                        <!-- Btn Filter -->
+                        <Button 
+                            Padding ="5 0"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            HorizontalAlignment="Right">
+
+                            <Path Data="M15 19.88C15.04 20.18 14.94 20.5 14.71 20.71C14.32 21.1 13.69 21.1 13.3 20.71L9.28998 16.7C9.05998 16.47 8.95998 16.16 8.99998 15.87V10.75L4.20998 4.62C3.86998 4.19 3.94998 3.56 4.37998 3.22C4.56998 3.08 4.77998 3 4.99998 3H19C19.22 3 19.43 3.08 19.62 3.22C20.05 3.56 20.13 4.19 19.79 4.62L15 10.75V19.88ZM7.03998 5L11 10.06V15.58L13 17.58V10.05L16.96 5H7.03998Z" 
+                              Fill="#486FEF"/>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Click">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
+                                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                                        </BooleanAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="ContextMenu">
+                                        <Setter.Value>
+                                            <ContextMenu x:Name="FiltMenu" >
+                                                <ContextMenu.Template>
+                                                    <ControlTemplate>
+                                                        <Border BorderBrush="#486FEF" BorderThickness="1" Width="150" CornerRadius="10" Background="White">
+                                                            <StackPanel Orientation="Vertical">
+                                                                <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button x:Name="BtnTitleFilt" HorizontalContentAlignment="Center" Content="Наименование" BorderThickness="0" Background="{x:Null}" Foreground="#486FEF" Click="BtnTitleFilt_Click"/>
+                                                                </Border>
+                                                                <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button x:Name="BtnFwFilt" HorizontalContentAlignment="Center" Content="Прошивка" BorderThickness="0" Background="{x:Null}" Foreground="#828282" Click="BtnFwFilt_Click"/>
+                                                                </Border>
+                                                                <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button x:Name="BtnDateFilt" HorizontalContentAlignment="Center" Content="Дата" BorderThickness="0" Background="{x:Null}" Foreground="#828282" Click="BtnDateFilt_Click"/>
+                                                                </Border>
+                                                                <Border BorderThickness="0" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                    <Button x:Name="BtnErrorTypeFilt" HorizontalContentAlignment="Center" Content="Тип ошибки" BorderThickness="0" Background="{x:Null}" Foreground="#828282" Click="BtnErrorTypeFilt_Click"/>
+                                                                </Border>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </ContextMenu.Template>
+                                            </ContextMenu>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button
+                            x:Name="BtnSaveXlsx"
+                            Padding ="5 0"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            HorizontalAlignment="Right" Click="BtnSaveXlsx_Click">
+                            <Grid>
+                                <Path Data="M4 3H18C19.11 3 20 3.9 20 5V12.08C18.45 11.82 16.92 12.18 15.68 13H12V17H13.08C12.97 17.68 12.97 18.35 13.08 19H4C2.9 19 2 18.11 2 17V5C2 3.9 2.9 3 4 3ZM4 7V11H10V7H4ZM12 7V11H18V7H12ZM4 13V17H10V13H4Z" Fill="#486FEF"/>
+                                <Path Data="M22 17L20 17L20 21L18 21L18 17L16 17L19 14L22 17Z" Fill="#486FEF"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <Grid VerticalAlignment="Bottom" Margin="5 5">
+                        <Border BorderThickness="0,0,0,2" BorderBrush="#EAEEF1" Margin="7 0"/>
+
+                        <Border BorderThickness="0,0,0,1" BorderBrush="#EAEEF1" Padding="0 0 0 0" Margin="6 0">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" Opacity="0.3"></DropShadowEffect>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <ListView x:Name="LvAnalysisInfo" Visibility="Visible"
+                          BorderThickness="0" 
+                          Margin="10 5"
+                          Background="White" 
+                          BorderBrush="{x:Null}"
+                          Grid.Row="1"
+                          SelectionChanged="LvAnalysisInfo_SelectionChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding CanID}"      Header="ID Can" Width="75" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Title}"      Header="Наименование" Width="150" />
-                            <GridViewColumn DisplayMemberBinding="{Binding AppVer}"     Header="Программная версия" Width="160"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding FWTitle}"    Header="Название прошивки" Width="200"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding FWVersion}"  Header="Версия прошивки" Width="140"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding CAN}">
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="CAN"/>
+                                        <Setter Property="Width" Value="50"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Title}">
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Наименование"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Version}">
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Прошивка"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Date}">
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Дата"/>
+                                        <Setter Property="Width" Value="80"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Path></Path>
+                                            <Label Content="{Binding StatusTxt}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Тип ошибки"/>
+                                        <Setter Property="Width" Value="150"/>
+
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                     <ListView.ItemContainerStyle>
@@ -178,13 +370,177 @@
                             <Setter Property="Foreground" Value="#486FEF"/>
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Background" Value="{x:Null}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Error}">
+                                    <Setter Property="Foreground" Value="#EB5757"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Actual}">
+                                    <Setter Property="Foreground" Value="#6FCF97"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Outdated}">
+                                    <Setter Property="Foreground" Value="#F5AB18"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Background" Value="#F2F2F2"/>
+                            <Setter Property="BorderBrush" Value="#F2F2F2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                        <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.00001*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+
+                                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+                                                <Track.Thumb>
+                                                    <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                                </Track.Thumb>
+                                            </Track>
+
+                                        </Grid>
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
                 </ListView>
+                
+                <ListView x:Name="LvUpdateInfo" Visibility="Hidden"
+                    BorderThickness="0" 
+                    Margin="10 5"
+                    Background="White" 
+                    BorderBrush="{x:Null}"
+                    Grid.Row="1" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="CAN"/>
+                                        <Setter Property="Width" Value="50"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Наименование"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+                            <GridViewColumn>
+
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Прошивка"/>
+                                        <Setter Property="Width" Value="80"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Дата"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Path></Path>
+                                            <Label>Condition</Label>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Состояние"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Path></Path>
+                                            <Label>Status</Label>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                        <Setter Property="Content" Value="Статус"/>
+                                        <Setter Property="Width" Value="150"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Foreground" Value="#486FEF"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="{x:Null}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Error}">
+                                    <Setter Property="Foreground" Value="#EB5757"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Actual}">
+                                    <Setter Property="Foreground" Value="#6FCF97"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Outdated}">
+                                    <Setter Property="Foreground" Value="#F5AB18"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Background" Value="#F2F2F2"/>
+                            <Setter Property="BorderBrush" Value="#F2F2F2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                        <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.00001*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+
+                                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+
+                                                <Track.Thumb>
+                                                    <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                                </Track.Thumb>
+                                            </Track>
+
+                                        </Grid>
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+
             </Grid>
 
         </Border>
 
+        <!--Btns modes -->
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"></ColumnDefinition>
@@ -195,6 +551,7 @@
 
             </Grid.ColumnDefinitions>
 
+            
             <Grid Grid.Column="3" Height="194" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="54"></RowDefinition>
@@ -251,6 +608,7 @@
             </Grid>
         </Grid>
 
+        <!--Btn update-->
         <Grid Grid.Row="3"  Grid.Column="1" Margin="0,210,0,0" Grid.RowSpan="3">
             <Border 
                 Grid.Row="0" 

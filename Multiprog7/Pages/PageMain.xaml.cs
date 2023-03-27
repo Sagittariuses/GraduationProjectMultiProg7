@@ -16,6 +16,10 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using static LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns;
+using System.Windows.Data;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace Multiprog7.Pages
 {
@@ -126,10 +130,16 @@ namespace Multiprog7.Pages
 
         public ObservableCollection<VMDevice> OcVMDev;
 
-        Thread ThreadToParce;
 
         public static FWForDevice FwFromManualMode = null;
         #endregion
+
+
+        public static FilterAnalysis currentFilt;
+
+       
+
+        public static ObservableCollection<FirmwareAnalysis> ocTest = new ObservableCollection<FirmwareAnalysis>();
 
         #endregion
 
@@ -137,7 +147,31 @@ namespace Multiprog7.Pages
         public PageMain()
         {
             InitializeComponent();
+            Random random = new Random();
+            FirmwareAnalysis firmwareAnalysis;
+            for (int i = 0; i < 100; i++) 
+            {
+                int a = random.Next(1, 4);
+                firmwareAnalysis = new FirmwareAnalysis(i)
+                {
+                    CAN = new Random().Next(100),
+                    Title = "Строка " + i,
+                    Version = random.Next(100),
+                    Date = DateTime.Now,
+                };
+                if (a == 1)
+                    firmwareAnalysis.StatusCode = FirmwareStatus.Error;
+                else if (a == 2)
+                    firmwareAnalysis.StatusCode = FirmwareStatus.Actual;
+                else
+                    firmwareAnalysis.StatusCode = FirmwareStatus.Outdated;
+                firmwareAnalysis.StatusTxt = "Статус " + firmwareAnalysis.StatusCode;
+                
+                ocTest.Add(firmwareAnalysis);
 
+
+
+            }
 
         }
 
@@ -162,50 +196,22 @@ namespace Multiprog7.Pages
                 }
                 catch { }
             }
+            PageCharts pageCharts = new PageCharts(ocTest);
+            pageCharts.pageMain = this;
             OcVMDev = new ObservableCollection<VMDevice>();
-            LVCanDevList.ItemsSource = OcVMDev;
+            FrameChartsMain.Navigate(pageCharts);
+            UpdateAnalysisData(currentFilt, PageCharts.currentChart);
+
         }
 
         #endregion
 
         #region Modes
-        private void BtnOnlineMode_Click(object sender, RoutedEventArgs e)
-        {
-            BtnOnlineMode.Style = (Style)Styles[styleActiveMode];
-            BtnOfflineMode.Style = (Style)Styles[styleInactiveMode];
-            BtnManualMode.Style = (Style)Styles[styleInactiveMode];
+        private void BtnOnlineMode_Click(object sender, RoutedEventArgs e) => ChangeMode(ModesCodes.Online);
 
-            OnlineActive = true;
-            OfflineActive = false;
-            ManualActive = false;
+        private void BtnOfflineMode_Click(object sender, RoutedEventArgs e) => ChangeMode(ModesCodes.Offline);
 
-        }
-
-        private void BtnOfflineMode_Click(object sender, RoutedEventArgs e)
-        {
-            BtnOnlineMode.Style = (Style)Styles[styleInactiveMode];
-            BtnOfflineMode.Style = (Style)Styles[styleActiveMode];
-            BtnManualMode.Style = (Style)Styles[styleInactiveMode];
-
-            OnlineActive = false;
-            OfflineActive = true;
-            ManualActive = false;
-
-
-
-
-        }
-
-        private void BtnManualMode_Click(object sender, RoutedEventArgs e)
-        {
-            BtnOnlineMode.Style = (Style)Styles[styleInactiveMode];
-            BtnOfflineMode.Style = (Style)Styles[styleInactiveMode];
-            BtnManualMode.Style = (Style)Styles[styleActiveMode];
-
-            OnlineActive = false;
-            OfflineActive = false;
-            ManualActive = true;
-        }
+        private void BtnManualMode_Click(object sender, RoutedEventArgs e) => ChangeMode(ModesCodes.Manual);
         #endregion
 
         #region LKDSFramework Events
@@ -223,37 +229,14 @@ namespace Multiprog7.Pages
             {
                 if (ActualFWNum == ListOfFWList.Count - 1)
                 {
-                    /*this.Invoke(new Action(() =>
-                    {
-                        LBInfo.Hide();
-                        LoadFirmwareBTN.Hide();
-                        progressBar2.Hide();
-                        ResultLB.Show();
-                        TimerToClose.Start();
-                    }));*/
-                    Dispatcher.Invoke((Action)(() =>
-                    {
-                        LbState.Content = labelContentAnalyze;
-                    }));
+                    Dispatcher.Invoke(() => { LbState.Content = labelContentAnalyze; });
                     FinishFlag = true;
                     RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
                     return;
                 }
                 else
                 {
-                    /*this.Invoke(new Action(() =>
-                    {
-                        LBInfo.Hide();
-                        LoadFirmwareBTN.Hide();
-                        progressBar2.Hide();
-                        ResultLB.Show();
-                        TimerToClose.Start();
-
-                    }));*/
-                    Dispatcher.Invoke((Action)(() =>
-                    {
-                        LbState.Content = labelContentAnalyze;
-                    }));
+                    Dispatcher.Invoke(() => { LbState.Content = labelContentAnalyze; });
                     FinishFlag = false;
                     RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
                     ActualFWNum++;
@@ -262,24 +245,17 @@ namespace Multiprog7.Pages
 
             }
 
-            
-
             if (pack is LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns)
             {
                 if (pack.CanID != CANID)
-                {
                     return;
-                }
+
                 if (pack.CanID != SelectedDevOrSubDevCANID)
-                {
                     return;
-                }
-                //ThreadToParce.Join();
+
                 LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns PackProcessorAns = pack as LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns;
                 foreach (FirmwareInfo FWInfo in FirmwareInfo.firmwares)
-                {
                     foreach (ProcessorStateStruct PSS in PackProcessorAns.Proccessors)
-                    {
                         if (FWInfo.deviceClass.Equals(PSS.Aclass))
                         {
                             Console.WriteLine("Class: " + FWInfo.deviceClass);
@@ -380,8 +356,6 @@ namespace Multiprog7.Pages
                                 }
                             }
                         }
-                    }
-                }
 
                 if (FirmwaresToDownload.Count == 0 && ActualFlag)
                 {
@@ -412,9 +386,8 @@ namespace Multiprog7.Pages
             {
                 LKDSFramework.Packs.DataDirect.PackV7IAPService IAPAns = (LKDSFramework.Packs.DataDirect.PackV7IAPService)pack;
                 if (IAPAns.Error != LKDSFramework.Packs.DataDirect.PackV7IAPService.IAPErrorType.NoError)
-                {
-                    //WriteError(IAPAns);
-                }
+                    Console.WriteLine("Error");
+                
                 else
                 {
                     if (IsUpdateFW)
@@ -427,10 +400,7 @@ namespace Multiprog7.Pages
                         {
                             try
                             {
-                                Dispatcher.Invoke((Action)(() =>
-                                {
-                                    LbState.Content = labelContentUpdate;
-                                }));
+                                Dispatcher.Invoke(() => { LbState.Content = labelContentUpdate; });
                             }
                             catch { }
 
@@ -456,12 +426,9 @@ namespace Multiprog7.Pages
                                     // If all pages are occupied, then the first inactive page is taken and cleared
                                     //
 
-
                                     SelectedPageNum = 2;
                                     if (SelectedPageNum == ActualPageNum)
-                                    {
                                         SelectedPageNum++;
-                                    }
 
                                     SendCleardAsk();
 
@@ -493,9 +460,7 @@ namespace Multiprog7.Pages
                                     }
                                 }
                                 else
-                                {
                                     Console.WriteLine("Ans is null");
-                                }
                             }
                         }
 
@@ -504,31 +469,14 @@ namespace Multiprog7.Pages
                         //
                         if (Step == 2)
                         {
-                            try
-                            {
-                                /*this.Invoke(new Action(() =>
-                                {
-                                    LBInfo.Text = InfoStrs[1];
-                                }));*/
-                            }
-                            catch { }
 
                             if (FirstWriteFlag)
                             {
-
-                                Dispatcher.Invoke(new Action(() =>
-                                {
-                                    PbMain.Value++;
-                                }));
-
+                                Dispatcher.Invoke(() => { PbMain.Value++; });
 
                                 SendWriteAsk();
                                 FirstWriteFlag = !FirstWriteFlag;
 
-                                /*this.Invoke(new Action(() =>
-                                {
-                                    LBTimeRes.Text = $"5 {InfoStrs[3]}";
-                                }));*/
                                 stopwatch.Start();
                                 return;
 
@@ -549,7 +497,7 @@ namespace Multiprog7.Pages
                                 long sec = Time - min * 60;*/
 
 
-                                Dispatcher.Invoke(new Action(() =>
+                                Dispatcher.Invoke(() =>
                                 {
                                     /*if (min == 0)
                                     {
@@ -558,15 +506,11 @@ namespace Multiprog7.Pages
 
                                     }
                                     else
-                                    {
                                         LBTimeRes.Text = $"{min} {InfoStrs[3]} {sec} {InfoStrs[2]}";
-                                    }*/
-                                    try
-                                    {
-                                        PbMain.Value++;
-                                    }
-                                    catch { }
-                                }));
+                                    */
+                                    PbMain.Value++;
+
+                                });
 
                                 if (Pos > ListOfFWList[ActualFWNum].Count)
                                 {
@@ -591,10 +535,7 @@ namespace Multiprog7.Pages
 
                                 if (SendLastFragFlag)
                                 {
-                                    Dispatcher.Invoke(new Action(() =>
-                                    {
-                                        PbMain.Value = PbMain.Maximum;
-                                    }));
+                                    Dispatcher.Invoke(() => { PbMain.Value = PbMain.Maximum; });
                                     SendLastFragFlag = false;
                                     Step++;
                                     return;
@@ -608,16 +549,6 @@ namespace Multiprog7.Pages
 
                         if (Step == 3)
                         {
-                            /*try
-                            {
-                                this.Invoke(new Action(() =>
-                                {
-                                    LBTimeRes.Text = null;
-                                    LBInfo.Text = "Обновление";
-                                }));
-                            }
-                            catch { }*/
-
                             SendUpdateAsk();
                             Step++;
                             return;
@@ -641,12 +572,6 @@ namespace Multiprog7.Pages
 
                                 if (PackReadAns.Data[3] == 170)
                                 {
-                                    Dispatcher.Invoke((Action)(() =>
-                                    {
-                                        LbState.Content = "Активация микропрограммы";
-
-                                    }));
-
                                     SendActivateAsk();
                                     Step++;
                                     return;
@@ -666,7 +591,6 @@ namespace Multiprog7.Pages
                                 if (PackActiveAns.Error == LKDSFramework.Packs.DataDirect.PackV7IAPService.IAPErrorType.NoError)
                                 {
                                     Console.WriteLine("/-/-/-/-/-/ Done /-/-/-/-/-/");
-                                    //TimerStateAsk.Start();
                                     RebootingTheDeviceFlag = true;
                                     IsUpdateFW = false;
                                 }
@@ -685,15 +609,7 @@ namespace Multiprog7.Pages
                         {
                             LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAns PackStateAns = IAPAns as LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAns;
                             FileExt = "*.b" + PackStateAns.IAPState.AppVer.ToString("X2");
-                            /*Invoke(new Action(() =>
-                            {
-                                SelectFirmwareBTN.Enabled = true;
-                                LBAndSubDeviceLV.Enabled = true;
-                            }));*/
                             FwOnPages.Clear();
-                            /*FWView(PackStateAns);
-                            WriteRecieve(IAPAns);*/
-                            //GenerateBTN(IAPAns);
                         }
                         else if (IAPAns is LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPReadAns)
                         {
@@ -702,12 +618,7 @@ namespace Multiprog7.Pages
 
 
                             VMDevice VMDev = null;
-                            /*FWGet = false;
-                            if (FWGet)
-                            {
-
-                            }*/
-                            Dispatcher.Invoke((Action)(() =>
+                            Dispatcher.Invoke(() =>
                             {
                                 stopwatch.Start();
                                 progressValue++;
@@ -787,24 +698,17 @@ namespace Multiprog7.Pages
                                 if (UpdateListView)
                                 {
                                     UpdateListView = false;
-                                    LVCanDevList.ItemsSource = OcVMDev;
+                                    //  LVCanDevList.ItemsSource = OcVMDev;
                                 }
                                 LbDevCount.Content = CounterDevSubdev.ToString();
-                                LVCanDevList.Items.Refresh();
-                                PbMain.Value = progressValue;
-                            }));
+                                //LVCanDevList.Items.Refresh();
+                                PbMain.Value++;
+                            });
 
 
 
-                        }
-                        else
-                        {
-                            //WriteRecieve(IAPAns);
                         }
                     }
-
-
-                    
                 }
             }
         }
@@ -817,7 +721,7 @@ namespace Multiprog7.Pages
                 Dispatcher.Invoke((Action)(() =>
                 {
                     FWGet = true;
-                    LVCanDevList.Items.Refresh();
+
                     VMDevice.SendReadAsk(dev.CanID);
 
                     CounterDevSubdev++;
@@ -828,30 +732,6 @@ namespace Multiprog7.Pages
                     CheckAnalyze = true;
                 }));
 
-
-                //
-                // Update device
-                //
-                if (OcVMDev.Count > 0)
-                {
-                    foreach (var device in OcVMDev)
-                    {
-                        if (device.CanID.Equals(dev.CanID))
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                UpdateListView = true;
-                                progressValue = Convert.ToInt32(PbMain.Maximum - 1);
-                                OcVMDev.Remove(device);
-                                LVCanDevList.ItemsSource = null;
-                                LVCanDevList.Items.Clear();
-                                LVCanDevList.Items.Refresh();
-                                VMDevice.SendReadAsk(dev.CanID);
-                            });
-                            break;
-                        }
-                    }
-                }
             }
             catch (Exception ex) 
             {
@@ -866,8 +746,8 @@ namespace Multiprog7.Pages
         {
             ListOfFWList.Clear();
             IsUpdateFW = true;
-            BtnUpdate.IsEnabled = false;
-            BtnUpdate.Style = (Style)Styles[styleUpdateDisable];
+            /*BtnUpdate.IsEnabled = false;
+            BtnUpdate.Style = (Style)Styles[styleUpdateDisable];*/
             FirmwaresToDownload.Clear();
             if (OnlineActive)
             {
@@ -917,55 +797,6 @@ namespace Multiprog7.Pages
             }
         }
 
-        private void LVCanDevList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (PbMain.Value.Equals(PbMain.Maximum) || PbMain.Value.Equals(0))
-            {
-                try
-                {
-                    if (!LVCanDevList.SelectedItem.Equals(null))
-                    {
-                        BtnUpdate.IsEnabled = true;
-                        BtnUpdate.Style = (Style)Styles[styleUpdateEnable];
-                        SelectedDevOrSubDevCANID = (byte)(LVCanDevList.SelectedItem as VMDevice).CanID;
-                        CANID = SelectedDevOrSubDevCANID;
-                        opt.CanID = SelectedDevOrSubDevCANID;
-                        if (SelectedDevOrSubDevCANID.Equals(0))
-                        {
-                            Driver.Devices[0].SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAsk());
-                            IsLiftBlock = true;
-                        }
-                        else
-                        {
-                            Driver.Devices[0].SubDevices[SelectedDevOrSubDevCANID].SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAsk());
-                            IsLiftBlock = false;
-                        }
-                    }
-                    else
-                    {
-                        BtnUpdate.IsEnabled = false;
-                        BtnUpdate.Style = (Style)Styles[styleUpdateDisable];
-                    }
-                }
-                catch
-                {
-
-                }
-                
-            }
-
-            
-        }
-
-        private void PbMain_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            /*if (LVCanDevList.Items.Count.Equals(Convert.ToInt32(LbDevCount.Content)))
-            {
-                PbMain.Value = PbMain.Maximum;
-            }*/
-        }
-
-
         #endregion
 
         #region Functions & procedures
@@ -984,10 +815,8 @@ namespace Multiprog7.Pages
             FirstWriteFlag = true;
             EmptyPageFound = false;
             Step = 0;
-            Dispatcher.Invoke(() =>
-            {
-                LbState.Content = labelContentPrepareFile;
-            });
+            Dispatcher.Invoke(() => { LbState.Content = labelContentPrepareFile; });
+
             for (int i = 0; i < FirmwaresToDownload.Count && FirmwaresToDownload[0].name != null; i++)
             {
                 if (FirmwaresToDownload.Count > 1)
@@ -1221,99 +1050,116 @@ namespace Multiprog7.Pages
         #endregion
 
 
-        /*void WriteRecieve(LKDSFramework.Packs.DataDirect.PackV7IAPService IAPAns)
+        private void LvAnalysisInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            WndDetail wndDetail = new WndDetail(ocTest);
+            wndDetail.ShowDialog();
+        }
+
+        private void BtnTitleFilt_Click(object sender, RoutedEventArgs e)
+        {
+            currentFilt = FilterAnalysis.Title;
+            UpdateAnalysisData(currentFilt, PageCharts.currentChart);
+            (sender as Button).Foreground = (Brush)new BrushConverter().ConvertFrom("#486FEF");
+        }
+
+        private void BtnFwFilt_Click(object sender, RoutedEventArgs e)
+        {
+            currentFilt = FilterAnalysis.FwVersion;
+            UpdateAnalysisData(currentFilt, PageCharts.currentChart);
+            (sender as Button).Foreground = (Brush)new BrushConverter().ConvertFrom("#486FEF");
+        }
+
+        private void BtnDateFilt_Click(object sender, RoutedEventArgs e)
+        {
+            currentFilt = FilterAnalysis.Date;
+            UpdateAnalysisData(currentFilt, PageCharts.currentChart);
+            (sender as Button).Foreground = (Brush)new BrushConverter().ConvertFrom("#486FEF");
+        }
+
+        private void BtnErrorTypeFilt_Click(object sender, RoutedEventArgs e)
+        {
+            currentFilt = FilterAnalysis.ErrorType;
+            UpdateAnalysisData(currentFilt, PageCharts.currentChart);
+            (sender as Button).Foreground = (Brush)new BrushConverter().ConvertFrom("#486FEF");
+        }
+
+        private void BtnSaveXlsx_Click(object sender, RoutedEventArgs e)
+        {
+            WndSaveXlsx wndSaveXlsx = new WndSaveXlsx();
+            wndSaveXlsx.ShowDialog();
+        }
+
+        public void UpdateAnalysisData(FilterAnalysis code, ChartsCodes chart)
+        {
+            var res = ocTest;
+
+            if (chart == ChartsCodes.Error)
+                res = new ObservableCollection<FirmwareAnalysis>(res.Where(p => p.StatusCode == FirmwareStatus.Error));
+            else if (chart == ChartsCodes.Outdate)
+                res = new ObservableCollection<FirmwareAnalysis>(res.Where(p => p.StatusCode == FirmwareStatus.Outdated));
+            else if (chart == ChartsCodes.Actual)
+                res = new ObservableCollection<FirmwareAnalysis>(res.Where(p => p.StatusCode == FirmwareStatus.Actual));
+
+
+            if (code == FilterAnalysis.Title)
+                res = new ObservableCollection<FirmwareAnalysis>(res.OrderBy(p => p.Title));
+            else if (code == FilterAnalysis.FwVersion)
+                res = new ObservableCollection<FirmwareAnalysis>(res.OrderBy(p => p.Version));
+            else if (code == FilterAnalysis.Date)
+                res = new ObservableCollection<FirmwareAnalysis>(res.OrderBy(p => p.Date));
+            else
+                res = new ObservableCollection<FirmwareAnalysis>(res.OrderBy(p => p.StatusCode));
+            LvAnalysisInfo.ItemsSource = res;
+        }
+
+        private void ChangeMode(ModesCodes mode)
+        {
+            if (mode == ModesCodes.Online)
             {
-                this.Invoke(new Action(() =>
-                {
-                    SendRecievePacksRTB.Text += $"Recieve Pack '{IAPAns.IAPCommand}', ";
-                    SendRecievePacksRTB.Text += $"on Device {FocusedDev.CanID}, {ActivePageTxt}";
-                    SendRecievePacksRTB.Text += $"\n-----------------Result: -----------------" +
-                   $"\nPack id: {IAPAns.PackID}" +
-                   $"\nPack class: {IAPAns.Class}" +
-                   $"\nPack type: {IAPAns.Type}" +
-                   $"\nPack state: {IAPAns.State}" +
-                   $"\nPack data: ";
-                    foreach (byte bt in IAPAns.Data)
-                    {
-                        SendRecievePacksRTB.Text += $"{bt} ";
-                    }
-                    SendRecievePacksRTB.Text += $"\n------------------------------------------\n\n";
-                    SendRecievePacksRTB.SelectionStart = SendRecievePacksRTB.TextLength;
-                    SendRecievePacksRTB.ScrollToCaret();
+                BtnOnlineMode.Style = (Style)Styles[styleActiveMode];
+                BtnOfflineMode.Style = (Style)Styles[styleInactiveMode];
+                BtnManualMode.Style = (Style)Styles[styleInactiveMode];
 
+                OnlineActive = true;
+                OfflineActive = false;
+                ManualActive = false;
+            } 
+            else if (mode == ModesCodes.Offline)
+            {
+                BtnOnlineMode.Style = (Style)Styles[styleInactiveMode];
+                BtnOfflineMode.Style = (Style)Styles[styleActiveMode];
+                BtnManualMode.Style = (Style)Styles[styleInactiveMode];
 
-                }));
+                OnlineActive = false;
+                OfflineActive = true;
+                ManualActive = false;
+            } 
+            else
+            {
+                BtnOnlineMode.Style = (Style)Styles[styleInactiveMode];
+                BtnOfflineMode.Style = (Style)Styles[styleInactiveMode];
+                BtnManualMode.Style = (Style)Styles[styleActiveMode];
+
+                OnlineActive = false;
+                OfflineActive = false;
+                ManualActive = true;
             }
-            catch { };
-
-
-
         }
 
-
-        void FWView(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAns pack)
+        private void PbMain_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
-            for (int i = 1; i != pack.IAPState.PageCount; i++)
-
-                Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPReadAsk()
-                {
-                    UnitID = FocusedDev.UnitID,
-                    Num = (byte)i,
-                    CanID = FocusedDev.CanID
-                });
-        }
-
-
-        void SendStateAsk()
-        {
-            Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPStateAsk()
+            if (PbMain.Value == PbMain.Maximum)
             {
-                UnitID = FocusedDev.UnitID,
-                CanID = FocusedDev.CanID
-            });
-        }
-
-        void SendReadAsk()
-        {
-            Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPReadAsk()
+                BtnUpdate.IsEnabled = true;
+                BtnUpdate.Style = (Style)Styles[styleUpdateEnable];
+            } else
             {
-                UnitID = FocusedDev.UnitID,
-                CanID = FocusedDev.CanID,
-                Num = (byte)PageNum
-            });
+                BtnUpdate.IsEnabled = false;
+                BtnUpdate.Style = (Style)Styles[styleUpdateDisable];
+            }
+            
         }
-
-        void SendUpdateAsk()
-        {
-            Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPUpdateAsk()
-            {
-                UnitID = FocusedDev.UnitID,
-                CanID = FocusedDev.CanID,
-                Num = (byte)PageNum
-            });
-        }
-
-        void SendActivateAsk()
-        {
-            Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAsk()
-            {
-                UnitID = FocusedDev.UnitID,
-                CanID = FocusedDev.CanID,
-                Num = (byte)PageNum
-            });
-        }
-
-        void SendClearAsk()
-        {
-            Driver.SendPack(new LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPClearAsk()
-            {
-                UnitID = FocusedDev.UnitID,
-                CanID = FocusedDev.CanID,
-                Num = (byte)PageNum
-            });
-        }*/
     }
+   
 }

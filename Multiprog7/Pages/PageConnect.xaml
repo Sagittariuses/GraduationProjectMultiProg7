@@ -4,10 +4,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Multiprog7.Pages"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="672" d:DesignWidth="1024"
       Title="PageConnect">
-
+    <Page.Resources>
+        <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
+            <Border Background="{TemplateBinding Background}" 
+        x:Name="Bd" BorderBrush="#FFE6DDDD"
+        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    
     <Grid>
         <Border 
                 Height="580"
@@ -29,303 +51,269 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.ColumnSpan="2"
-                       Content="Параметры ЛБ"   
-                       VerticalAlignment="Top" 
+
+                <!--Header-->
+                
+                <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Параметры ЛБ"   
+                       VerticalAlignment="Bottom" 
                        HorizontalAlignment="Center"
-                       Height="45"
-                       Width="214"
-                       Margin="250,34,251,0"
                        Foreground="#486FEF"
+                       FontWeight="Bold"
                        FontSize="30"
                        HorizontalContentAlignment="Center"/>
+                <!--Close button-->
+                <Button x:Name="BtnBack" Grid.Column="0" Grid.Row="0" Background="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25 20" Click="BtnBack_Click">
+                    <Path Data="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.58L3.83 7H18V5Z" 
+                              Fill="#486FEF"/>
+                </Button>
 
-                <CheckBox x:Name="ChBCloudUse"
-                          Content="Использовать облако" 
-                          HorizontalAlignment="Center"
-                          Margin="72,46,72,40" 
-                          Grid.Row="1" 
-                          Width="214"
-                          VerticalAlignment="Center"
-                          Foreground="#828282">
-                    <CheckBox.Resources>
-                        <Style x:Key="FocusVisual">
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
-                        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
-                        <Style x:Key="OptionMarkFocusVisual">
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
-                        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
-                        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#486FEF"/>
-                        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
-                        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
-                        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#828282"/>
-                        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
-                        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
-                        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#486FEF"/>
-                        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#828282"/>
-                        <Style x:Key="CheckBoxStyleCustom" TargetType="{x:Type CheckBox}">
-                            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-                            <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type CheckBox}">
-                                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                                <Grid x:Name="markGrid">
-                                                    <Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource OptionMark.Static.Glyph}" Margin="1" Opacity="0" Stretch="None"/>
-                                                    <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
-                                                </Grid>
-                                            </Border>
-                                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="HasContent" Value="true">
-                                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
-                                                <Setter Property="Padding" Value="4,-1,0,0"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="true">
-                                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Background}"/>
-                                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
-                                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
-                                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="false">
-                                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
-                                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
-                                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
-                                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="true">
-                                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
-                                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
-                                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
-                                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsChecked" Value="true">
-                                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
-                                            </Trigger>
-                                            <Trigger Property="IsChecked" Value="{x:Null}">
-                                                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
-                                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </CheckBox.Resources>
-                </CheckBox>
+                
+                <!--#region Id block -->
+
                 <Label Grid.Row="1" Grid.Column="0"
-                       Content="Облако"   
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       Width="214"
-                       Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
-                <TextBox HorizontalAlignment="Center" 
-                         Height="27" 
-                         Grid.Row="3" 
-                         TextWrapping="Wrap" 
-                         Text="0" 
-                         Width="214"
-                         VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
-                    <TextBox.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
-
-                <Label Grid.Row="2" Grid.Column="0"
-                       Content="IP адрес сервера"   
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       Width="214"
-                       Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
-                <TextBox HorizontalAlignment="Center" 
-                         Height="27" 
-                         Grid.Row="2" 
-                         TextWrapping="Wrap" 
-                         Text="0" 
-                         Width="214"
-                         VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
-                    <TextBox.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
-
-                <Label Grid.Row="3" Grid.Column="0"
-                       Content="Порт сервера"   
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       Width="214"
-                       Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
-                <TextBox HorizontalAlignment="Center" 
-                         Height="27" 
-                         Grid.Row="3" 
-                         TextWrapping="Wrap" 
-                         Text="0" 
-                         Width="214"
-                         VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
-                    <TextBox.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
-
-
-                <Label Grid.Row="1" Grid.Column="1"
                        Content="ID блока"   
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
                        Width="214"
+                       FontWeight="Medium"
                        Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
+                       FontSize="16" Margin="24,0,0,60"/>
                 <TextBox x:Name="TBLU"
                          HorizontalAlignment="Center" 
-                         Height="27" 
+                         Height="44" 
                          Grid.Row="1" 
-                         Grid.Column="1"
+                         Grid.Column="0"
                          TextWrapping="Wrap" 
-                         Text="0" 
+                         Text="10681" 
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
                          Width="214"
                          VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
+                         Margin="84,38,60,18"
+                         Foreground="#828282"
+                         PreviewTextInput="TBLU_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
 
-                <Label Grid.Row="2" Grid.Column="1"
+                <!--#endregion-->
+
+                <!--#region Ip-->
+                <Label Grid.Row="1" Grid.Column="1"
+                       Content="IP"   
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Width="214"
+                       FontWeight="Medium"
+                       Foreground="#486FEF"
+                       FontSize="16" 
+                       Margin="0 0 20 64"
+                       />
+
+                <xctk:MaskedTextBox 
+                        x:Name="MaskTbIP"
+                        HorizontalAlignment="Center" 
+                        Height="44" 
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        Mask="###.###.###.###"
+                        PromptChar=" "
+                        CaretIndex="0"  
+                        TextWrapping="Wrap" 
+                        Text="" 
+                        FontSize="14"
+                        VerticalContentAlignment="Center"
+                        Padding="10 0"
+                        Width="214"
+                        VerticalAlignment="Center"
+                        Margin="60,38,84,18"
+                        Foreground="#828282"
+                        TextChanged="MaskTbIP_TextChanged"
+                        PreviewTextInput = "MaskTbIP_PreviewTextInput">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </xctk:MaskedTextBox>
+
+                <!--#endregion-->
+
+                <!--#region Pass1 -->
+
+                <Label Grid.Row="2" Grid.Column="0"
                        Content="Пароль"   
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
                        Width="214"
+                       FontWeight="Medium"
                        Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
-                <TextBox x:Name="TBPass"
+                       FontSize="16" Margin="24,0,0,60"/>
+                <PasswordBox
+                         x:Name="PboxFirst"
                          HorizontalAlignment="Center" 
-                         Height="27" 
+                         Height="44" 
+                         Grid.Row="2" 
+                         Grid.Column="0"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
+                         PasswordChar="●"
+                         Width="214"
+                         Password="1231234"
+                         VerticalAlignment="Center" 
+                         Margin="84,38,60,18"
+                         Foreground="#828282"
+                         Template="{StaticResource passwordbox}">
+                </PasswordBox>
+                <!--#endregion-->
+
+                <!--#region Pass2 -->
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       Content="Пароль"   
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Width="214"
+                       FontWeight="Medium"
+                       Foreground="#486FEF"
+                       FontSize="16" Margin="24,0,0,60"/>
+                <PasswordBox
+                         x:Name="PboxSecond"
+                         HorizontalAlignment="Center" 
+                         Height="44" 
+                         Grid.Row="3" 
+                         Grid.Column="0"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
+                         PasswordChar="●"
+                         Password="123465798"
+                         Width="214"
+                         VerticalAlignment="Center" 
+                         Margin="84,38,60,18"
+                         Foreground="#828282"
+                         Template="{StaticResource passwordbox}">
+                </PasswordBox>
+
+                <!--#endregion-->
+
+                <!--#region Cloud-->
+
+                <Label Grid.Row="2" Grid.Column="1"
+                       Content="Cloud"   
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Width="214"
+                       FontWeight="Medium"
+                       Foreground="#486FEF"
+                       FontSize="16" Margin="0,0,20,60"/>
+
+                <TextBox x:Name="TBCloud"
+                         HorizontalAlignment="Center" 
+                         Height="44" 
                          Grid.Row="2" 
                          Grid.Column="1"
                          TextWrapping="Wrap" 
-                         Text="" 
+                         Text="10681" 
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
                          Width="214"
                          VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
+                         Margin="60,38,84,18"
+                         Foreground="#828282"
+                         PreviewTextInput = "TBCloud_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
+                <!--#endregion-->
+
+                <!--#region CAN -->
 
                 <Label Grid.Row="3" Grid.Column="1"
                        Content="CAN"   
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
                        Width="214"
+                       FontWeight="Medium"
                        Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
-                <TextBox HorizontalAlignment="Center" 
-                         Height="27" 
+                       FontSize="16" Margin="0,0,20,60"/>
+
+                <TextBox x:Name="TBCan"
+                         HorizontalAlignment="Center" 
+                         Height="44" 
                          Grid.Row="3" 
                          Grid.Column="1"
                          TextWrapping="Wrap" 
-                         Text="0" 
+                         Text="10681" 
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
                          Width="214"
                          VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
-                         Foreground="#828282">
+                         Margin="60,38,84,18"
+                         Foreground="#828282"
+                         PreviewTextInput = "TBCan_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-
+                <!--#endregion-->
+                
+                <!--#region Description-->
+                
                 <Label Grid.Row="4" Grid.Column="0"
                        Content="Описание"   
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
                        Width="214"
                        Foreground="#486FEF"
-                       FontSize="16" Margin="0,0,0,40"/>
+                       FontWeight="Medium"
+                       FontSize="16" Margin="24,0,0,60"/>
                 <TextBox HorizontalAlignment="Center" 
-                         Height="27" 
+                         Height="44" 
                          Grid.Row="4" 
                          Grid.ColumnSpan="2"
                          TextWrapping="Wrap" 
                          Text="Введите адрес" 
-                         Width="572"
+                         Width="548"
                          VerticalAlignment="Center" 
-                         Margin="72,47,72,26"
+                         Margin="72,38,72,18"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="5 0"
                          Foreground="#828282">
                     <TextBox.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
+
+
                 </TextBox>
+                <!--#endregion-->
 
-
+                <!--Add button-->
+                
                 <Button
                         Grid.Row="5"
                         Grid.ColumnSpan="2"
-                    Height="40"
-                    Width="574"
-                        x:Name="BtnConnectLB"
-                        Content="Подключиться"
-                        BorderThickness="0"  
-                        Background ="#486FEF"
-                        FontWeight="Bold"
-                        FontSize="18"
-                        Foreground="White"
+                        Height="54"
+                        Width="548"
+                        x:Name="BtnAddLB"
+                        Content="Добавить"
+                        Style="{StaticResource BtnActiveMode}"
                         Click="BtnConnectLB_Click">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="15"/>
-                        </Style>
-                    </Button.Resources>
                 </Button>
 
             </Grid>

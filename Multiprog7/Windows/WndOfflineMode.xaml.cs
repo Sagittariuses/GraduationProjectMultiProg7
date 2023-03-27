@@ -61,5 +61,14 @@ namespace Multiprog7.Windows
 
             }
         }
+
+        private void dragMe(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                DragMove();
+            }
+            catch { }
+        }
     }
 }

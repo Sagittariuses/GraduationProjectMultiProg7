@@ -21,9 +21,6 @@ namespace Multiprog7
         [STAThread]
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            /*WndManualMode wndManual = new WndManualMode();
-            wndManual.Show();
-*/
 
             MainWindow wnd = new MainWindow();
             Args = e.Args;

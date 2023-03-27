@@ -1,0 +1,227 @@
+﻿<Page x:Class="Multiprog7.Pages.PageCharts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Multiprog7.Pages"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="254" d:DesignWidth="733"
+      Title="PageCharts">
+
+    <Border Background="#FFFFFF" CornerRadius="10">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Header-->
+            <Grid Grid.Row="0">
+                <Label Content="Обзор" Style="{StaticResource LbHeader}"/>
+                <Button x:Name="BtnChartsByType"
+                            Width="67" 
+                            Margin="0,3,10,8"
+                            HorizontalAlignment="Right" Click="BtnChartByType_Click">
+                    По типу
+                    <Button.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource BtnUpdateDisabled}">
+                            <Setter Property="Foreground" Value="#BDBDBD"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="FontWeight" Value="Normal"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="5"
+                                                    BorderBrush="#BDBDBD"
+                                                    Background="{x:Null}"
+                                                    BorderThickness="1">
+                                            <ContentPresenter
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Margin="{TemplateBinding Padding}" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Grid  VerticalAlignment="Bottom" Margin="5 5">
+                    <Border BorderThickness="0,0,0,2" BorderBrush="#EAEEF1"/>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#EAEEF1" Padding="0 0 0 2">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" Opacity="0.3"></DropShadowEffect>
+                        </Border.Effect>
+                    </Border>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--PieCharts in buttons-->
+                <Button x:Name="BtnFullChart" Background="{x:Null}" BorderThickness="0" Grid.Column="0" BorderBrush="White" Click="BtnFullChart_Click">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{x:Null}">
+                                            <ContentPresenter />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Grid>
+                        <Border x:Name="BorderFullChart" Background="#F9F9F9" BorderBrush="#486FEF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
+                            <lvc:PieChart Name="ChartFull" Grid.Row="1" Margin="-6"
+                            InnerRadius="70" Hoverable="False" >
+                                <lvc:PieChart.DataTooltip>
+                                    <lvc:DefaultTooltip Visibility="Hidden"/>
+                                </lvc:PieChart.DataTooltip>
+                            </lvc:PieChart>
+                        </Border>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label x:Name="LbErrorsFull" Content="24 999"  Margin="-5" Foreground ="#EA5D5F"  Style="{StaticResource LbForCharts}"/>
+                                <Label x:Name="LbOutdatesFull" Content="50 000"  Margin="-5" Foreground ="#E5A119"  Style="{StaticResource LbForCharts}"/>
+                                <Label x:Name="LbActualsFull" Content="25 000"  Margin="-5" Foreground ="#27AE60"  Style="{StaticResource LbForCharts}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Button>
+
+                <Button x:Name="BtnErrorsChart" Background="{x:Null}" BorderThickness="0" Grid.Column="1" BorderBrush="White" Click="BtnErrorsChart_Click">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{x:Null}">
+                                            <ContentPresenter />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Grid>
+                        <Border x:Name="BorderErrorsChart" Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
+                            <lvc:PieChart Name="ChartErrors" Grid.Row="1"  Margin="-6"
+                            InnerRadius="70" Hoverable="False" >
+                                <lvc:PieChart.DataTooltip>
+                                    <lvc:DefaultTooltip Visibility="Hidden"/>
+                                </lvc:PieChart.DataTooltip>
+                            </lvc:PieChart>
+                        </Border>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="Ошибки" HorizontalContentAlignment="Center" Margin="0 -10">
+                                <Label.Resources>
+                                    <Style TargetType="Label" BasedOn="{StaticResource LbHeader}">
+                                        <Setter Property="FontSize" Value="12"/>
+                                    </Style>
+                                </Label.Resources>
+                            </Label>
+                            <Label  x:Name="LbErrors" Content="24 999" HorizontalContentAlignment="Center"  Margin="0 14" Foreground ="#EA5D5F"  Style="{StaticResource LbForCharts}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Button>
+
+                <Button x:Name="BtnOutdatedsChart" Background="{x:Null}" BorderThickness="0" Grid.Column="2" BorderBrush="White" Click="BtnOutdatedsChart_Click">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{x:Null}">
+                                            <ContentPresenter />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Grid>
+                        <Border x:Name="BorderOutdatesChart" Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
+                            <lvc:PieChart Name="ChartOutdatedFw" Grid.Row="1" Margin="-6"
+                            InnerRadius="70" Hoverable="False" >
+                                <lvc:PieChart.DataTooltip>
+                                    <lvc:DefaultTooltip Visibility="Hidden"/>
+                                </lvc:PieChart.DataTooltip>
+                            </lvc:PieChart>
+                        </Border>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock   Margin="0 -10" HorizontalAlignment="Center" TextAlignment="Center">
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TbHeader}">
+                                        <Setter Property="FontSize" Value="12"/>
+                                    </Style>
+                                </TextBlock.Resources> Устаревшие
+                                <LineBreak/>
+                                прошивки
+
+                            </TextBlock>
+                            <Label x:Name="LbOutdates" Content="50 000"  HorizontalContentAlignment="Center" Margin="0 14" Foreground ="#E5A119"  Style="{StaticResource LbForCharts}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Button>
+
+                <Button x:Name="BtnActualsChart" Background="{x:Null}" BorderThickness="0" Grid.Column="3" BorderBrush="White" Click="BtnActualsChart_Click">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{x:Null}">
+                                            <ContentPresenter />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Grid>
+                        <Border x:Name="BorderActualsChart" Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
+                            <lvc:PieChart Name="ChartActualFw" Grid.Row="1" InnerRadius="70" Hoverable="False" Margin="-6" >
+                                <lvc:PieChart.DataTooltip>
+                                    <lvc:DefaultTooltip Visibility="Hidden"/>
+                                </lvc:PieChart.DataTooltip>
+                            </lvc:PieChart>
+                        </Border>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock   Margin="0 -10" HorizontalAlignment="Center" TextAlignment="Center">
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TbHeader}">
+                                        <Setter Property="FontSize" Value="12"/>
+                                    </Style>
+                                </TextBlock.Resources>Актуальные
+                                <LineBreak/>
+                                прошивки
+
+                            </TextBlock>
+                            <Label x:Name="LbActuals" Content="25 000"  Margin="0 14" HorizontalContentAlignment="Center" Foreground ="#27AE60"  Style="{StaticResource LbForCharts}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Button>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+</Page>

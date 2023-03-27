@@ -10,10 +10,8 @@
         WindowStyle="None" 
         Loaded="Window_Loaded"
         Icon="/Resources/LogoTitleBar.png"
-        Title="MultiProg7" Height="740" Width="1024">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="32" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
-    </WindowChrome.WindowChrome>
+        Style="{StaticResource WinAll}"
+        Title="MultiProg7" Height="740" Width="1024" MouseLeftButtonDown="dragMe">
     <Grid Background="#F6F6F6">
         <Grid.RowDefinitions>
             <RowDefinition Height="68"></RowDefinition>

@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Multiprog7.Pages
 {
@@ -20,9 +13,142 @@ namespace Multiprog7.Pages
     /// </summary>
     public partial class PageAddLiftBlock : Page
     {
+        public static ObservableCollection<string[]> LiftBlocks = new ObservableCollection<string[]>();
+        ResourceDictionary Styles = (ResourceDictionary)Application.LoadComponent(
+            new Uri("/MultiProg7;component/ResourceDictionaries/Styles.xaml", UriKind.Relative));
+        private string styleActiveMode = "BtnActiveMode";
+        private string styleUpdateDisabled = "BtnUpdateDisabled";
+
         public PageAddLiftBlock()
         {
             InitializeComponent();
+            LViewLbForConnect.ItemsSource = LiftBlocks;
         }
+
+        private void BtnAddLiftBlock_Click(object sender, RoutedEventArgs e)
+        {
+            PageConnect pageConnect = new PageConnect();
+            pageConnect.MyEvent += new EventHandler(LViewLbForConnect_CollectionChanged);
+            NavigationService.Navigate(pageConnect);
+        }
+
+        private void BtnSaveBat_Click(object sender, RoutedEventArgs e)
+        {
+            // save .bat file
+        }
+
+        private void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            App.Args = new string[] {"-cloud", "-lu54172", "-pass123456789q" };
+            NavigationService.Navigate(new PageMain());
+        }
+
+        private void BtnDeleteAll_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = LiftBlocks.Count-1; i >=0 ; i--)
+            {
+                LiftBlocks.Remove(LiftBlocks[i]);
+            }
+            FirstView();
+            ((INotifyCollectionChanged)LViewLbForConnect.Items).CollectionChanged += LViewLbForConnect_CollectionChanged;
+        }
+
+        private void BtnSaveCurrentLBBat_Click(object sender, RoutedEventArgs e)
+        {
+            // save .bat file for currnet lb
+        }
+
+        private void BtnDeleteCurrentLB_Click(object sender, RoutedEventArgs e)
+        {
+            var item = LViewLbForConnect.SelectedItem as string[];
+            LiftBlocks.Remove(item);
+            if (LViewLbForConnect.Items.Count == 0)
+            {
+                FirstView();
+            }  else if (LViewLbForConnect.Items.Count > 1)
+            {
+                UpdateView();
+            }
+
+            ((INotifyCollectionChanged)LViewLbForConnect.Items).CollectionChanged += LViewLbForConnect_CollectionChanged;
+        }
+
+        private void LViewLbForConnect_CollectionChanged(object sender, EventArgs e)
+        {
+            if (LViewLbForConnect.Items.Count > 0)
+            {
+                BtnConnect.Style = (Style)Styles[styleActiveMode];
+                BtnConnect.IsEnabled = true;
+
+                UpdateMargin();
+                if (LViewLbForConnect.Items.Count == 1)
+                {
+                    SecondVew();
+                    return;
+                }
+
+                if (MainBorder.Height != 565)
+                {
+                    if (LViewLbForConnect.Items.Count == 5)
+                    {
+                        MainBorder.Height = 565;
+                        RowSecond.Height = new GridLength(350);
+                    }
+                    else
+                    {
+                        UpdateView();
+                    }
+                }
+
+                
+            } else
+            {
+                BtnConnect.Style = (Style)Styles[styleUpdateDisabled];
+                BtnConnect.IsEnabled = false;
+            }
+        }
+
+        private void UpdateView()
+        {
+            UpdateMargin();
+            if (LViewLbForConnect.Items.Count == 5)
+            {
+                MainBorder.Height = 565;
+                RowSecond.Height = new GridLength(350);
+            }
+            else
+            {
+                MainBorder.Height = 323 + LViewLbForConnect.Items.Count * 80;
+                RowSecond.Height = new GridLength(LViewLbForConnect.Items.Count * 85);
+            }
+           
+        }
+        private void UpdateMargin()
+        {
+            if (LViewLbForConnect.Items.Count > 5)
+            {
+                LViewLbForConnect.Margin = new Thickness(15, 6, 0, 0);
+            }
+            else
+            {
+                LViewLbForConnect.Margin = new Thickness(0, 6, 0, 0);
+            }
+        }
+        private void FirstView()
+        {
+            PanelWithBtns.Visibility = Visibility.Collapsed;
+            MainBorder.Height = 227;
+            BtnConnect.Margin = new Thickness(0);
+            RowSecond.Height = new GridLength(85);
+        }
+        private void SecondVew()
+        {
+            PanelWithBtns.Visibility = Visibility.Visible;
+            MainBorder.Height = 323;
+            RowSecond.Height = new GridLength(40 + LViewLbForConnect.Items.Count * 80);
+            BtnConnect.Margin = new Thickness(0, 20, 0, 0);
+
+        }
+        
     }
 }
