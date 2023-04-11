@@ -2,10 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="WinAll" TargetType="{x:Type Window}">
-        <Setter Property="FontFamily"
-        Value="/Resources/#Inter" />
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Inter-Regular.ttf #Inter" />
     </Style>
 
+    <Style x:Key="PageFont" TargetType="{x:Type Page}">
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Inter-Regular.ttf #Inter" />
+    </Style>
+    <Style x:Key="UcFont" TargetType="{x:Type UserControl}">
+        <Setter Property="Foreground" Value="#828282"/>
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Inter-Regular.ttf #Inter" />
+    </Style>
+    
     <Style x:Key="BtnActiveMode" TargetType="Button">
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontSize" Value="18"/>

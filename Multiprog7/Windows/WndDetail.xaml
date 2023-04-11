@@ -10,6 +10,7 @@
         WindowStyle="None" 
         Icon="/Resources/LogoTitleBar.png"
         Background="{x:Null}"
+        Style="{StaticResource WinAll}"
         AllowsTransparency="True" 
         MouseLeftButtonDown="dragMe"
         Title="WndDetail" Height="268" Width="753">
@@ -27,6 +28,7 @@
             <!--Header detail-->
             <Grid Grid.Row="0">
                 <Label 
+                    x:Name="LbLiftTitle"
                     Content="ЛБ7-Canny 192.168.254.255 / 104427"
                     Style="{StaticResource LbHeader}"/>
 
@@ -53,7 +55,108 @@
                 </Grid>
             </Grid>
 
-            <ListView x:Name="LvUpdateInfo" Visibility="Visible"
+            <ListView x:Name="LvAnalysisInfo" Visibility="Visible"
+                          BorderThickness="0" 
+                          Margin="10 5"
+                          Background="White" 
+                          BorderBrush="{x:Null}"
+                          Grid.Row="1"
+                          >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Наименование"/>
+                                    <Setter Property="Width" Value="176"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Version}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Прошивка"/>
+                                    <Setter Property="Width" Value="176"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Date}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Дата"/>
+                                    <Setter Property="Width" Value="176"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{Binding PathData}" Fill="{Binding PathFill}" Margin="0 7"></Path>
+                                        <Label Content="{Binding StatusTxt}" Foreground="{Binding PathFill}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Тип ошибки"/>
+                                    <Setter Property="Width" Value="177"/>
+
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Foreground" Value="#486FEF"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="{x:Null}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Error}">
+                                <Setter Property="Foreground" Value="#EB5757"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Actual}">
+                                <Setter Property="Foreground" Value="#6FCF97"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Outdated}">
+                                <Setter Property="Foreground" Value="#F5AB18"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="Background" Value="#F2F2F2"/>
+                        <Setter Property="BorderBrush" Value="#F2F2F2"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                    <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.00001*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+
+                                        <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+                                            <Track.Thumb>
+                                                <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                            </Track.Thumb>
+                                        </Track>
+
+                                    </Grid>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
+
+            <ListView x:Name="LvUpdateDetailInfo" Visibility="Hidden"
                     BorderThickness="0" 
                     Margin="10 5"
                     Background="White" 
@@ -61,7 +164,7 @@
                     Grid.Row="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding CAN}">
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="CAN"/>
@@ -70,7 +173,7 @@
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>
 
-                        <GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}">
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="Наименование"/>
@@ -78,8 +181,8 @@
                                 </Style>
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>
-                        <GridViewColumn>
 
+                        <GridViewColumn DisplayMemberBinding="{Binding Version}">
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="Прошивка"/>
@@ -88,7 +191,7 @@
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>
 
-                        <GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Date}">
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="Дата"/>
@@ -102,7 +205,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Path></Path>
-                                        <Label>Condition</Label>
+                                        <Label Content="{Binding StatusTxt}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -129,7 +232,7 @@
                                 </Style>
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>
-                        <GridViewColumn>
+                        <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button

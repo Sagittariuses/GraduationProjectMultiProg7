@@ -5,13 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Multiprog7.Pages"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:IpTextBox="clr-namespace:Multiprog7.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="672" d:DesignWidth="1024"
+      Style="{StaticResource PageFont}"
       Title="PageConnect">
     <Page.Resources>
         <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
             <Border Background="{TemplateBinding Background}" 
-        x:Name="Bd" BorderBrush="#FFE6DDDD"
+        x:Name="Bd" BorderBrush="#828282"
         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
                 <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
             </Border>
@@ -81,10 +83,10 @@
                 <TextBox x:Name="TBLU"
                          HorizontalAlignment="Center" 
                          Height="44" 
+                         Text="54172"
                          Grid.Row="1" 
                          Grid.Column="0"
                          TextWrapping="Wrap" 
-                         Text="10681" 
                          FontSize="14"
                          VerticalContentAlignment="Center"
                          Padding="5 0"
@@ -95,6 +97,7 @@
                          PreviewTextInput="TBLU_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="#828282"/>
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
@@ -113,33 +116,18 @@
                        FontSize="16" 
                        Margin="0 0 20 64"
                        />
-
-                <xctk:MaskedTextBox 
-                        x:Name="MaskTbIP"
-                        HorizontalAlignment="Center" 
+                <IpTextBox:IPTextBox
+                        x:Name="TbIp"
+                        HorizontalAlignment="Left"
+                        Margin="60 20 0 0 "
                         Height="44" 
                         Grid.Row="1" 
                         Grid.Column="1"
-                        Mask="###.###.###.###"
-                        PromptChar=" "
-                        CaretIndex="0"  
-                        TextWrapping="Wrap" 
-                        Text="" 
                         FontSize="14"
                         VerticalContentAlignment="Center"
-                        Padding="10 0"
                         Width="214"
-                        VerticalAlignment="Center"
-                        Margin="60,38,84,18"
-                        Foreground="#828282"
-                        TextChanged="MaskTbIP_TextChanged"
-                        PreviewTextInput = "MaskTbIP_PreviewTextInput">
-                    <TextBox.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </TextBox.Resources>
-                </xctk:MaskedTextBox>
+                        BorderBrush="#828282"
+                        VerticalAlignment="Center"/>
 
                 <!--#endregion-->
 
@@ -155,16 +143,16 @@
                        FontSize="16" Margin="24,0,0,60"/>
                 <PasswordBox
                          x:Name="PboxFirst"
+                         Password="123456789q"
                          HorizontalAlignment="Center" 
                          Height="44" 
                          Grid.Row="2" 
                          Grid.Column="0"
-                         FontSize="14"
+                         FontSize="12"
                          VerticalContentAlignment="Center"
                          Padding="5 0"
                          PasswordChar="●"
                          Width="214"
-                         Password="1231234"
                          VerticalAlignment="Center" 
                          Margin="84,38,60,18"
                          Foreground="#828282"
@@ -185,14 +173,14 @@
                 <PasswordBox
                          x:Name="PboxSecond"
                          HorizontalAlignment="Center" 
+                         Password="123456789q"
                          Height="44" 
                          Grid.Row="3" 
                          Grid.Column="0"
-                         FontSize="14"
+                         FontSize="12"
                          VerticalContentAlignment="Center"
                          Padding="5 0"
                          PasswordChar="●"
-                         Password="123465798"
                          Width="214"
                          VerticalAlignment="Center" 
                          Margin="84,38,60,18"
@@ -219,7 +207,6 @@
                          Grid.Row="2" 
                          Grid.Column="1"
                          TextWrapping="Wrap" 
-                         Text="10681" 
                          FontSize="14"
                          VerticalContentAlignment="Center"
                          Padding="5 0"
@@ -230,6 +217,7 @@
                          PreviewTextInput = "TBCloud_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="#828282"/>
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
@@ -253,7 +241,6 @@
                          Grid.Row="3" 
                          Grid.Column="1"
                          TextWrapping="Wrap" 
-                         Text="10681" 
                          FontSize="14"
                          VerticalContentAlignment="Center"
                          Padding="5 0"
@@ -264,6 +251,7 @@
                          PreviewTextInput = "TBCan_PreviewTextInput">
                     <TextBox.Resources>
                         <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="#828282"/>
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
@@ -285,8 +273,8 @@
                          Grid.Row="4" 
                          Grid.ColumnSpan="2"
                          TextWrapping="Wrap" 
-                         Text="Введите адрес" 
                          Width="548"
+                         ToolTip="Введите адрес"
                          VerticalAlignment="Center" 
                          Margin="72,38,72,18"
                          FontSize="14"
@@ -295,6 +283,7 @@
                          Foreground="#828282">
                     <TextBox.Resources>
                         <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="#828282"/>
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>

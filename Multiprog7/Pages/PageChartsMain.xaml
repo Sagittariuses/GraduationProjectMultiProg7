@@ -7,6 +7,7 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="254" d:DesignWidth="733"
+      Style="{StaticResource PageFont}"
       Title="PageCharts">
 
     <Border Background="#FFFFFF" CornerRadius="10">
@@ -169,9 +170,9 @@
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource TbHeader}">
                                         <Setter Property="FontSize" Value="12"/>
                                     </Style>
-                                </TextBlock.Resources> Устаревшие
-                                <LineBreak/>
-                                прошивки
+                                </TextBlock.Resources> 
+                                
+                                Устаревшие <LineBreak/> прошивки
 
                             </TextBlock>
                             <Label x:Name="LbOutdates" Content="50 000"  HorizontalContentAlignment="Center" Margin="0 14" Foreground ="#E5A119"  Style="{StaticResource LbForCharts}"/>

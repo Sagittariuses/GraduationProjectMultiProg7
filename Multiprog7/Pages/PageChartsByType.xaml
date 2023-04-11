@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Multiprog7.Pages"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:fwCode="clr-namespace:Multiprog7.Classes"
       mc:Ignorable="d" 
       d:DesignHeight="254" d:DesignWidth="733"
       Title="PageChartsByType">
@@ -59,7 +60,7 @@
                     </Button.Resources>
                     <Grid>
                         <Border Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
-                            <lvc:PieChart Name="ChartFullTypes" Grid.Row="1" Series="{Binding ErrorsCollection}" Margin="-6"
+                            <lvc:PieChart Name="ChartFullTypes" Grid.Row="1" Series="{Binding Collection}" Margin="-6"
                             InnerRadius="70" Hoverable="False" >
                                 <lvc:PieChart.DataTooltip>
                                     <lvc:DefaultTooltip Visibility="Hidden"/>
@@ -67,139 +68,103 @@
                             </lvc:PieChart>
                         </Border>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Label Content="Ошибки" HorizontalContentAlignment="Center" Margin="0 -10">
-                                <Label.Resources>
-                                    <Style TargetType="Label" BasedOn="{StaticResource LbHeader}">
-                                        <Setter Property="FontSize" Value="12"/>
-                                    </Style>
-                                </Label.Resources>
-                            </Label>
-                            <Label Content="24 999"  Margin="0 14" Foreground ="#EA5D5F"  Style="{StaticResource LbForCharts}"/>
-                        </StackPanel>
-
-                    </Grid>
-                </Button>
-                <!--Эти как-то в GridView (наверное) надо-->
-                <Button Background="{x:Null}" BorderThickness="0" Grid.Column="1" BorderBrush="White">
-                    <Button.Resources>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid Background="{x:Null}">
-                                            <ContentPresenter />
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Resources>
-                    <Grid>
-                        <Border Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
-                            <lvc:PieChart Name="ChartErrors" Grid.Row="1" Series="{Binding ErrorsCollection}" Margin="-6"
-                            InnerRadius="70" Hoverable="False" >
-                                <lvc:PieChart.DataTooltip>
-                                    <lvc:DefaultTooltip Visibility="Hidden"/>
-                                </lvc:PieChart.DataTooltip>
-                            </lvc:PieChart>
-                        </Border>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Label Content="Ошибки" HorizontalContentAlignment="Center" Margin="0 -10">
-                                <Label.Resources>
-                                    <Style TargetType="Label" BasedOn="{StaticResource LbHeader}">
-                                        <Setter Property="FontSize" Value="12"/>
-                                    </Style>
-                                </Label.Resources>
-                            </Label>
-                            <Label Content="24 999"  Margin="0 14" Foreground ="#EA5D5F"  Style="{StaticResource LbForCharts}"/>
-                        </StackPanel>
-
-                    </Grid>
-                </Button>
-                <Button Background="{x:Null}" BorderThickness="0" Grid.Column="2" BorderBrush="White">
-                    <Button.Resources>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid Background="{x:Null}">
-                                            <ContentPresenter />
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Resources>
-                    <Grid>
-                        <Border Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
-                            <lvc:PieChart Name="ChartOutdatedFw" Grid.Row="1" Series="{Binding OutdatedFwCollection}" Margin="-6"
-                            InnerRadius="70" Hoverable="False" >
-                                <lvc:PieChart.DataTooltip>
-                                    <lvc:DefaultTooltip Visibility="Hidden"/>
-                                </lvc:PieChart.DataTooltip>
-                            </lvc:PieChart>
-                        </Border>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock   Margin="0 -10" HorizontalAlignment="Center" TextAlignment="Center">
+                            <TextBlock Text="{Binding ChartType}" TextAlignment="Center"  Margin="0 -10">
                                 <TextBlock.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource TbHeader}">
                                         <Setter Property="FontSize" Value="12"/>
                                     </Style>
                                 </TextBlock.Resources>
-                                Устаревшие
-                                <LineBreak/>
-                                прошивки
-                               
                             </TextBlock>
-                            <Label Content="50 000"  Margin="0 14" Foreground ="#E5A119"  Style="{StaticResource LbForCharts}"/>
+                            <Label Content="{Binding Count}"  Margin="0 14" Foreground ="{Binding LabelColor}"  HorizontalAlignment="Center" Style="{StaticResource LbForCharts}"/>
                         </StackPanel>
 
                     </Grid>
                 </Button>
-                <Button Background="{x:Null}" BorderThickness="0" Grid.Column="3" BorderBrush="White">
-                    <Button.Resources>
-                        <Style TargetType="Button">
+                
+                <ItemsControl x:Name="DevByTypes" Grid.Column="1" ItemsSource="{Binding ChildUniformGrids}" Margin="10 0" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{x:Null}" BorderThickness="0">
+                                <Button.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Grid Background="{x:Null}">
+                                                        <ContentPresenter />
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Resources>
+                                <Grid Grid.Column="0">
+                                    <Border Background="#F9F9F9" BorderThickness="4" CornerRadius="100" Height="90" Width="90" >
+                                        <lvc:PieChart Name="Chart" Grid.Row="1"  Margin="-6,-6,-5,-6" Series="{Binding SeriesCol}"
+                            InnerRadius="35" Hoverable="False" >
+                                            <lvc:PieChart.DataTooltip>
+                                                <lvc:DefaultTooltip Visibility="Hidden"/>
+                                            </lvc:PieChart.DataTooltip>
+                                        </lvc:PieChart>
+                                    </Border>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Label Content="{Binding DevCount}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-5" Foreground="{Binding DevColour}">
+                                            <Label.Resources>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="FontSize" Value="20"/>
+                                                    <Setter Property="FontWeight" Value="Normal"/>
+                                                </Style>
+                                            </Label.Resources>
+                                        </Label>
+                                        <Label Content="{Binding DevType}" FontSize="10" Foreground="#4f4f4f" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Padding="-5"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.Resources>
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Background" Value="#F2F2F2"/>
+                            <Setter Property="BorderBrush" Value="#F2F2F2"/>
                             <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid Background="{x:Null}">
-                                            <ContentPresenter />
+                                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                        <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.00001*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+
+                                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+
+                                                <Track.Thumb>
+                                                    <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                                </Track.Thumb>
+                                            </Track>
+
                                         </Grid>
+
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                    </Button.Resources>
-                    <Grid>
-                        <Border Background="#F9F9F9" BorderBrush="#FFFFFF" BorderThickness="4" CornerRadius="100" Height="170" Width="170" >
-                            <lvc:PieChart Name="ChartCurrentFw" Grid.Row="1" Series="{Binding CurrentFwCollection}" 
-                                        InnerRadius="70" Hoverable="False" Margin="-6" >
-                                <lvc:PieChart.DataTooltip>
-                                    <lvc:DefaultTooltip Visibility="Hidden"/>
-                                </lvc:PieChart.DataTooltip>
-                            </lvc:PieChart>
-                        </Border>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock   Margin="0 -10" HorizontalAlignment="Center" TextAlignment="Center">
-                                <TextBlock.Resources>
-                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TbHeader}">
-                                        <Setter Property="FontSize" Value="12"/>
-                                    </Style>
-                                </TextBlock.Resources>
-                                Актуальные
-                                <LineBreak/>
-                                прошивки
-                                
-                            </TextBlock>
-                            <Label Content="25 000"  Margin="0 14" Foreground ="#27AE60"  Style="{StaticResource LbForCharts}"/>
-                        </StackPanel>
-
-                    </Grid>
-                </Button>
-
-                <Grid Grid.Column="1" Grid.Row="1">
-
-                </Grid>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer CanContentScroll="True">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                </ItemsControl>
 
 
 

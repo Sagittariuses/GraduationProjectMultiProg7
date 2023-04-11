@@ -4,6 +4,279 @@
         <name>LKDSFramework</name>
     </assembly>
     <members>
+        <member name="T:LKDSFramework.SingleInstanceAppHelper">
+            <summary>
+            Проверяет запущен ли такой же процесс в ОС.
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.SingleInstanceAppHelper.FirstInstance">
+            <summary>
+            Единственный ли экземлеяр запущен
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.SingleInstanceAppHelper.#ctor">
+            
+        </member>
+        <member name="P:LKDSFramework.BaseObject.DBTableName">
+            <summary>
+            Имя таблицы в БД
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.BaseObject.ID">
+            <summary>
+            Идентификатор в БД
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.BaseObject.Tag">
+            <summary>
+            Таг
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.UIBase.TextOptionType">
+            <summary>
+            Настройки отображения текста
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.None">
+            <summary>
+            Не отображать
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.Down">
+            <summary>
+            Снизу
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.DownWrap">
+            <summary>
+            Снизу и перенос
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.Up">
+            <summary>
+            Сверху
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.UpWrap">
+            <summary>
+            Сверху и перенос
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.Left">
+            <summary>
+            Слева
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOptionType.Right">
+            <summary>
+            Справа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.Type">
+            <summary>
+            Тип шаблона
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.Rect">
+            <summary>
+            Координаты ЭУ в группе
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.isSee">
+            <summary>
+            Просмотренное событие
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.Channel">
+            <summary>
+            Ссылка на канал данных
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.TextOption">
+            <summary>
+            Настройки отображения текста в ЭУ
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.Comment">
+            <summary>
+            Коментарии
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UIBase.LTime">
+            <summary>
+            Последнее обновление
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.ChannelsV7.NumType">
+            <summary>
+            Возвращает Номер и тип в одном 2ух байтовом числе для списков
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.ChannelsV7.Num">
+            <summary>
+            Номер канала данных
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.ChannelsV7.Type">
+            <summary>
+            Тип канала
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.ChannelsV7.MyType">
+            <summary>
+            Тип канала
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.ChannelsV7.Parrent">
+            <summary>
+            Ссылка на объект предок
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChBattary">
+            <summary>
+            Представляет состояние сух входа
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChBattary.BattaryFlagsType">
+            <summary>
+            Тип данных - Флаги состояний батареи
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChBattary.BatValue">
+            <summary>
+            % аккумулятора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChBattary.BatState">
+            <summary>
+            Состояние батареи
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChInput">
+            <summary>
+            Представляет состояние сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChInput.Enabled">
+            <summary>
+            Сосотояния сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChInput.isInverse">
+            <summary>
+            Является ли канал инверсным
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChOutput">
+            <summary>
+            Представляет состояние телеуправления релейного типа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutput.Enabled">
+            <summary>
+            Сосотояния сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutput.isInverse">
+            <summary>
+            Является ли канал инверсным
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutput.Delay">
+            <summary>
+            Импульсный режим - длинна выполнения команды
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutput.Extra">
+            <summary>
+            Импульсный режим - длинна задержки исполнения
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChOutputSmart">
+            <summary>
+            Представляет состояние телеуправления релейного типа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutputSmart.LOutState">
+            <summary>
+            Состояние выхода
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutputSmart.Delay">
+            <summary>
+            Импульсный режим - длинна выполнения команды
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChOutputSmart.Extra">
+            <summary>
+            Импульсный режим - длинна задержки исполнения
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChSecure">
+            <summary>
+            Представляет состояние сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChSecure.Key">
+            <summary>
+            Ключ со свойствами
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChStub">
+            <summary>
+            Представляет состояние сух входа
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChTrig">
+            <summary>
+            Представляет состояние сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChTrig.Enabled">
+            <summary>
+            Сосотояния сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChTrig.isInverse">
+            <summary>
+            Является ли канал инверсным
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Channels.ChVoice">
+            <summary>
+            Представляет состояние голосового тракта
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChVoice.Enabled">
+            <summary>
+            Сосотояния сух входа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChVoice.Abonents">
+            <summary>
+            Данные о 8 возможных абонентах текущего тракта
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChVoice.VolumeMicro">
+            <summary>
+            Громкость записи
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChVoice.VolumeHead">
+            <summary>
+            Громкость воспр
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Channels.ChVoice.VoiceState">
+            <summary>
+            Сборка флагов состояний
+            </summary>
+        </member>
         <member name="T:LKDSFramework.CriptKey">
             <summary>
             пакет устройств v7
@@ -30,6 +303,11 @@
             </summary>
         </member>
         <member name="F:LKDSFramework.CriptKey.DecryptCloudKey">
+            <summary>
+            ОБъект ключ для дешифровки обачных пакетов
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.CriptKey.EncryptDecryptDefKey">
             <summary>
             ОБъект ключ для дешифровки обачных пакетов
             </summary>
@@ -81,6 +359,53 @@
             </summary>
             <param name="value"></param>
         </member>
+        <member name="T:LKDSFramework.UI.DeviceConnectionForm">
+            <summary>
+            Элемент управление - форма для настройски подключение к ЛБ
+            </summary>
+        </member>
+        <member name="E:LKDSFramework.UI.DeviceConnectionForm.OnConnectionClick">
+            <summary>
+            Событие нажатия кнопки подключения
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.UI.DeviceConnectionForm.isError">
+            <summary>
+            Уставновить состояние - ошибка подключения
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.UI.DeviceConnectionForm.Device">
+            <summary>
+            Опции устройства
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.UI.DeviceConnectionForm.Enabled">
+            <summary>
+            Разрешение на редактирование
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.UI.DeviceConnectionForm.Lang">
+            <summary>
+            Текущий язык формы
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.UI.DeviceConnectionForm.components">
+            <summary> 
+            Обязательная переменная конструктора.
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.UI.DeviceConnectionForm.Dispose(System.Boolean)">
+            <summary> 
+            Освободить все используемые ресурсы.
+            </summary>
+            <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        </member>
+        <member name="M:LKDSFramework.UI.DeviceConnectionForm.InitializeComponent">
+            <summary> 
+            Требуемый метод для поддержки конструктора — не изменяйте 
+            содержимое этого метода с помощью редактора кода.
+            </summary>
+        </member>
         <member name="T:LKDSFramework.DeviceV7">
             <summary>
             Объект - узловое устройство, наследник подустройства. EQ
@@ -109,6 +434,11 @@
         <member name="F:LKDSFramework.DeviceV7.WorkModeType.SeeToSubDevice">
             <summary>
             Следить за устройствами на CAN. Обеспечение подписок
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DeviceV7.WorkModeType.SeeCallbacks">
+            <summary>
+            Оформлять подписки для устройств на CAN. Обеспечение подписок
             </summary>
         </member>
         <member name="F:LKDSFramework.DeviceV7.WorkModeType.FULL">
@@ -146,19 +476,14 @@
             Тип данных - Тип лифтового блока
             </summary>
         </member>
+        <member name="F:LKDSFramework.DeviceV7.UnitID">
+            <summary>
+            Идентификатор устройства
+            </summary>
+        </member>
         <member name="F:LKDSFramework.DeviceV7.SubDevices">
             <summary>
             Список устройств шины CAN
-            </summary>
-        </member>
-        <member name="E:LKDSFramework.DeviceV7.OnCallbackChangeState">
-            <summary>
-            Событие изменения состояния подписки
-            </summary>
-        </member>
-        <member name="E:LKDSFramework.DeviceV7.OnSubDevChange">
-            <summary>
-            Событие изменения состояния устройства или подустройства
             </summary>
         </member>
         <member name="F:LKDSFramework.DeviceV7.WorkMode">
@@ -211,6 +536,11 @@
             УДП Порт реальный
             </summary>
         </member>
+        <member name="F:LKDSFramework.DeviceV7.LCountSubDev">
+            <summary>
+            Колдичество под устройств найденое аппаратно
+            </summary>
+        </member>
         <member name="M:LKDSFramework.DeviceV7.FromArgs(System.String[],System.Boolean)">
             <summary>
             Получение списка узловых устройств из аргументов коммандной строки
@@ -227,23 +557,17 @@
             <param name="IP">адрес v4 для анализа</param>
             <returns></returns>
         </member>
-        <member name="M:LKDSFramework.DeviceV7.SendStateCallbackAsunc(LKDSFramework.Packs.DataCallback.PackV7CallbacksSetAsk.CallbackOptions)">
-            
-        </member>
-        <member name="M:LKDSFramework.DeviceV7.SendStateSubDevAsunc(LKDSFramework.SubDeviceV7)">
-            
-        </member>
-        <member name="M:LKDSFramework.DeviceV7.Clone(LKDSFramework.DeviceV7)">
+        <member name="M:LKDSFramework.DeviceV7.Clone(LKDSFramework.VirtualDeviceV7)">
             <summary>
             Полная независимая копия объекта
             </summary>
-            <param name="data">объект для копирования</param>
+            <param name="_data">объект для копирования</param>
         </member>
-        <member name="M:LKDSFramework.DeviceV7.CloneLight(LKDSFramework.SubDeviceV7)">
+        <member name="M:LKDSFramework.DeviceV7.CloneLight(LKDSFramework.VirtualDeviceV7)">
             <summary>
             Копирует только оперативные данные об устройстве
             </summary>
-            <param name="data">объект для копирования</param>
+            <param name="_data">объект для копирования</param>
         </member>
         <member name="M:LKDSFramework.DeviceV7.Clone">
             <summary>
@@ -283,11 +607,6 @@
             Таймаут подтверждения сообщения
             </summary>
         </member>
-        <member name="F:LKDSFramework.DeviceV7FW.TimeoutRefreshCallback">
-            <summary>
-            Таймаут подписки
-            </summary>
-        </member>
         <member name="F:LKDSFramework.DeviceV7FW.WinCount">
             <summary>
             Ширина окна автомата
@@ -316,11 +635,6 @@
         <member name="F:LKDSFramework.DeviceV7FW.LTimePackTo">
             <summary>
             Последнее сообщение от
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DeviceV7FW.LRefreshCallback">
-            <summary>
-            Последняя подписка устройства
             </summary>
         </member>
         <member name="F:LKDSFramework.DeviceV7FW.ToPacks">
@@ -378,124 +692,225 @@
             Текущее имя лога
             </summary>
         </member>
-        <member name="M:LKDSFramework.DeviceV7FW.SendAllCallbackSet(LKDSFramework.SubDeviceV7)">
-            
-        </member>
-        <member name="F:LKDSFramework.DriverV7.ServerIdent">
+        <member name="M:LKDSFramework.DeviceV7FW.SendCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
             <summary>
-            Идент сервера
+            Добавляет подписку в очередь
             </summary>
+            <param name="call"></param>
+            <returns></returns>
         </member>
-        <member name="P:LKDSFramework.DriverV7.EndPoint">
+        <member name="M:LKDSFramework.DeviceV7FW.SendPack(LKDSFramework.Packs.PackV7)">
             <summary>
-            Возвращает выданый адрес для автомата
+            Отправляет пакет в очередь
             </summary>
+            <param name="_pack"></param>
+            <returns></returns>
         </member>
-        <member name="F:LKDSFramework.DriverV7.UDPClient">
-            <summary>
-            UDP клиент сервера
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.CriptKeys">
-            <summary>
-            Ключи шифрования
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.EndpointKeys">
-            <summary>
-            Ключи шифрования по устройтсвам
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.DevicesList">
-            <summary>
-            Ключи шифрования по устройтсвам
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.OutThread">
-            <summary>
-            Поток для разбора изходящих пакетов
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.InTrashThread">
-            <summary>
-            Поток для разбора входящего мусора
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.OutEvent">
-            <summary>
-            Событие входящих пакетов
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.DriverV7.IndexInPack">
+        <member name="F:LKDSFramework.DriverV7Base.IndexInPack">
             <summary>
             Текущий индекс входящих пакетво
             </summary>
         </member>
-        <member name="F:LKDSFramework.DriverV7.IndexOutPack">
+        <member name="F:LKDSFramework.DriverV7Base.IndexOutPack">
             <summary>
             Текущий индекс исходящих пакетов
             </summary>
         </member>
-        <member name="P:LKDSFramework.DriverV7.Devices">
+        <member name="F:LKDSFramework.DriverV7Base.OnReceiveData">
+            <summary>
+            Событие прихода пакета данных 4:3 
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.OnReceiveVoice">
+            <summary>
+            Событие прихода голосового пакета
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.OnPackChangeState">
+            <summary>
+            Событие изменения состояния отправленного пакета
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.OnDevChange">
+            <summary>
+            Событие изменения состояния устройств v7
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.OnSubChange">
+            <summary>
+            Событие изменения состояния устройств v7
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.OnCallbackChangeState">
+            <summary>
+            Событие изменения состояния подписок
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Base.ServerIdent">
+            <summary>
+            Идентификатор сервера
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Base.DevicesCount">
+            <summary>
+            Возвращает количество устройств в автомате
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Base.Devices">
             <summary>
             Возвращает безопасную копию всех устройств автомата
             </summary>
         </member>
-        <member name="P:LKDSFramework.DriverV7.DevicesListLock">
+        <member name="P:LKDSFramework.DriverV7Base.isWorking">
             <summary>
-            Возвращает залоченый список устрйств
+            Успешный ли был запуск
             </summary>
         </member>
-        <member name="M:LKDSFramework.DriverV7.Init(System.Net.IPEndPoint,System.UInt32)">
-            <summary>
-            Инициализация автомата
-            </summary>
-            <param name="ep"> опциональные настройки порта и адреса </param>
-            <param name="_ServerIdent"> опциональный идент сервера</param>
-            <returns>признак успеха</returns>
-        </member>
-        <member name="M:LKDSFramework.DriverV7.Close">
-            <summary>
-            ЗАвершает работу автомата
-            </summary>
-            <returns>признак успеха</returns>
-        </member>
-        <member name="M:LKDSFramework.DriverV7.AddDevice(LKDSFramework.DeviceV7@)">
+        <member name="M:LKDSFramework.DriverV7Base.AddDevice(LKDSFramework.DeviceV7@)">
             <summary>
             Добавляет устройтсво в автомат, организует связи в объекте dev
             </summary>
             <param name="dev">устройтсво</param>
             <returns>признак успеха</returns>
         </member>
-        <member name="M:LKDSFramework.DriverV7.DelDevice(System.UInt32)">
-            <summary>
-            Удаляет устройство из автомата
-            </summary>
-            <param name="ID">UNITIT</param>
-            <returns>признак успеха </returns>
-        </member>
-        <member name="M:LKDSFramework.DriverV7.ReInitDevice(LKDSFramework.DeviceV7@)">
+        <member name="M:LKDSFramework.DriverV7Base.ReInitDevice(LKDSFramework.DeviceV7@)">
             <summary>
             Удаляет и добавляет заново устройтсво в автомат
             </summary>
             <param name="dev">устройство</param>
             <returns>признак успеха</returns>
         </member>
-        <member name="M:LKDSFramework.DriverV7.DelDevice(LKDSFramework.DeviceV7)">
+        <member name="M:LKDSFramework.DriverV7Base.DelDevice(LKDSFramework.DeviceV7)">
             <summary>
              Удаляет устройство из автомата
             </summary>
             <param name="dev">устройство</param>
             <returns>признак успеха</returns>
         </member>
-        <member name="M:LKDSFramework.DriverV7.SendPack(LKDSFramework.Packs.PackV7)">
+        <member name="M:LKDSFramework.DriverV7Base.DelDevice(System.UInt32)">
+            <summary>
+            Удаляет устройство из автомата
+            </summary>
+            <param name="ID">UNITIT</param>
+            <returns>признак успеха </returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Base.SendPack(LKDSFramework.Packs.PackV7)">
             <summary>
             Послать пакет устройству - данные об устройстве в полях пакета
             </summary>
             <param name="pack">пакет с полями</param>
             <returns>уникальный номер пакета</returns>
         </member>
-        <member name="M:LKDSFramework.DriverV7.SetCallback(LKDSFramework.Packs.DataCallback.PackV7CallbacksSetAsk.CallbackOptions)">
+        <member name="M:LKDSFramework.DriverV7Base.SendCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
+            <summary>
+            Уставновить подписки устройству - данные об устройстве в полях пакета
+            </summary>
+            <param name="call">пакет с подписками</param>
+            <returns>уникальный номер подписки</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Base.Init(System.UInt32)">
+            <summary>
+            Инициализация автомата
+            </summary>
+            <param name="_ServerIdent"> опциональный идент сервера</param>
+            <returns>признак успеха</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Base.Close">
+            <summary>
+            ЗАвершает работу автомата
+            </summary>
+            <returns>признак успеха</returns>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Net.EndPoint">
+            <summary>
+            Возвращает выданый адрес для автомата
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.UDPClient">
+            <summary>
+            UDP клиент сервера
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.CriptKeys">
+            <summary>
+            Ключи шифрования
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.EndpointKeys">
+            <summary>
+            Ключи шифрования по устройтсвам
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.DevicesList">
+            <summary>
+            Ключи шифрования по устройтсвам
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.OutThread">
+            <summary>
+            Поток для разбора изходящих пакетов
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.InTrashThread">
+            <summary>
+            Поток для разбора входящего мусора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.DriverV7Net.OutEvent">
+            <summary>
+            Событие входящих пакетов
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Net.DevicesCount">
+            <summary>
+            Возвращает количество устройств в автомате
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Net.Devices">
+            <summary>
+            Возвращает безопасную копию всех устройств автомата
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.DriverV7Net.DevicesListLock">
+            <summary>
+            Возвращает залоченый список устрйств
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.Init(System.UInt32)">
+            <summary>
+            Инициализация автомата
+            </summary>
+            <param name="_ServerIdent"> опциональный идент сервера</param>
+            <returns>признак успеха</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.Close">
+            <summary>
+            ЗАвершает работу автомата
+            </summary>
+            <returns>признак успеха</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.AddDevice(LKDSFramework.DeviceV7@)">
+            <summary>
+            Добавляет устройтсво в автомат, организует связи в объекте dev
+            </summary>
+            <param name="dev">устройтсво</param>
+            <returns>признак успеха</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.DelDevice(System.UInt32)">
+            <summary>
+            Удаляет устройство из автомата
+            </summary>
+            <param name="ID">UNITIT</param>
+            <returns>признак успеха </returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.SendPack(LKDSFramework.Packs.PackV7)">
+            <summary>
+            Послать пакет устройству - данные об устройстве в полях пакета
+            </summary>
+            <param name="pack">пакет с полями</param>
+            <returns>уникальный номер пакета</returns>
+        </member>
+        <member name="M:LKDSFramework.DriverV7Net.SendCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
             <summary>
             Уставновить подписки устройству - данные об устройстве в полях пакета
             </summary>
@@ -539,6 +954,152 @@
             <param name="enumVal">переменная - значение</param>
             <param name="enemState">флаги к удалению</param>
             <returns></returns>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate">
+            <summary>
+            Автомат принятия решений по обновлению устройства
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.UpdateOption">
+            <summary>
+            Опции рассчета обновления
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.Options">
+            <summary>
+            Опции анализатора
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult">
+            <summary>
+            Типа результата работы анализатора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.newFirmwareIsNotFound">
+            <summary>
+            Обновление не найдено
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.newFirmwareIsFound">
+            <summary>
+            Необходимо обновление
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.justManualUpdate">
+            <summary>
+            Возможно только ручное обновление
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.filePathIsEmpty">
+            <summary>
+            не передан список файлов
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.argumentHasError">
+            <summary>
+            в переданных аргументах находятся ошибки
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.currentFirmwareIsNewr">
+            <summary>
+            Прошивка в устройвте новее, чем в файле
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.FirmwareAndResult">
+            <summary>
+            Тип результат работы
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.Results">
+            <summary>
+            Результат работы анализатора
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.SetFilePath(System.String[])">
+            <summary>
+            Задаёт список файлов прошивок или zip-архив с ними. Требует обработки исключений!
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.Analyze(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType)">
+            <summary>
+            Анализирует пакет ИАПА и выносит вердикт по прошивкам устройства
+            </summary>
+            <param name="unitInfo">данные из пакета</param>
+            <returns> што нужно прошивать</returns>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.parseFimwares(System.String[])">
+            <summary>
+            Разбор файлов прошивок из архива или из файлов
+            </summary>
+            <param name="filePaths"></param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.FirmewareFileDescriptor">
+            <summary>
+            Содержит разбор данных из фаила прошивок
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.ifdVersion">
+            <summary>
+            Версия IAP Firmware Descriptor
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.seek">
+            <summary>
+            Смещение следующего дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.deviceDescription">
+            <summary>
+            Описнание устрйоства
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.dateOfDescriptorCreated">
+            <summary>
+            Дата создания дескриптора. Переведено в unix time
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.hardwareRequired">
+            <summary>
+            Требуемая аппаратная часть BOOT
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.softwareRequired">
+            <summary>
+            Требуемая программная часть BOOT
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.programmSize">
+            <summary>
+            Длина программы фактическая из дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.descriptor">
+            <summary>
+            Описательная часть программы из Дескриптора
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.isItNewer(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType,LKDSFramework.FWUpdate.CheckForUpdate.UpdateOption)">
+            <summary>
+            Проверяет является ли файл новее, чем описание из IAPDeviceInfoType. Выбрасывает исключение из нижнего уровня.
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.getFileDescriptorOrNull">
+            <summary>
+            Получение описания прошивки из файла
+            </summary>
+            <returns>Описание</returns>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.getFirmware">
+            <summary>
+            Возвращает из файла только ту часть, котора относится к прошивке т.е. без всех дескрипторов.
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.isFirstVersionBigger(LKDSFramework.Union32,LKDSFramework.Union32)">
+            <summary>
+            Проверяет является ли первоя версия больше второй. Выбрасывает исключение.
+            </summary>
         </member>
         <member name="P:LKDSFramework.IdeaEngine.isInit">
             <summary>
@@ -598,53 +1159,6 @@
             </summary>
             <param name="cryped">зашифрованый массив</param>
             <returns>массив разшифрованный</returns>
-        </member>
-        <member name="T:LKDSFramework.UI.LBConnectionForm">
-            <summary>
-            Элемент управление - форма для настройски подключение к ЛБ
-            </summary>
-        </member>
-        <member name="E:LKDSFramework.UI.LBConnectionForm.OnConnectionClick">
-            <summary>
-            Событие нажатия кнопки подключения
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.UI.LBConnectionForm.isError">
-            <summary>
-            Уставновить состояние - ошибка подключения
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.UI.LBConnectionForm.Device">
-            <summary>
-            Опции устройства
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.UI.LBConnectionForm.Enabled">
-            <summary>
-            Разрешение на редактирование
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.UI.LBConnectionForm.Lang">
-            <summary>
-            Текущий язык формы
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.UI.LBConnectionForm.components">
-            <summary> 
-            Обязательная переменная конструктора.
-            </summary>
-        </member>
-        <member name="M:LKDSFramework.UI.LBConnectionForm.Dispose(System.Boolean)">
-            <summary> 
-            Освободить все используемые ресурсы.
-            </summary>
-            <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        </member>
-        <member name="M:LKDSFramework.UI.LBConnectionForm.InitializeComponent">
-            <summary> 
-            Требуемый метод для поддержки конструктора — не изменяйте 
-            содержимое этого метода с помощью редактора кода.
-            </summary>
         </member>
         <member name="T:LKDSFramework.LowLevelLog">
             <summary>
@@ -772,6 +1286,11 @@
             Битовая маска устройств на связи
             </summary>
         </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.CANService.PackV7CANSubDevStateAns.OnlineCount">
+            <summary>
+            Количество обнаруженых устройств
+            </summary>
+        </member>
         <member name="P:LKDSFramework.Packs.DataDirect.CANService.PackV7CANSubDevStateAns.ResetMask">
             <summary>
             Битовая маска рестартов устройтсв. Самоочищается за 20сек
@@ -875,6 +1394,16 @@
         <member name="P:LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.Proccessors">
             <summary>
             Массив описателей процессоров
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.SoftDate">
+            <summary>
+            Время создания активной прошивки
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfo">
+            <summary>
+            Полная структура IAP описателя устройства
             </summary>
         </member>
         <member name="T:LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAsk">
@@ -1002,46 +1531,6 @@
             Команда сервиса кан
             </summary>
         </member>
-        <member name="T:LKDSFramework.Packs.DataDirect.PackV7DallassAns">
-            <summary>
-            Пакет ответа с параметрами ключа доступа 4:3:22
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.Packs.DataDirect.PackV7DallassAns.SecKey.Num">
-            <summary>
-            Код ключа
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.Packs.DataDirect.PackV7DallassAns.SecKey.Type">
-            <summary>
-            Тип ключа
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.Packs.DataDirect.PackV7DallassAns.SecKey.Lenght">
-            <summary>
-            Длинна Ключ
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.Packs.DataDirect.PackV7DallassAns.SecKey.Iter">
-            <summary>
-            Последний считаный индекс
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.Packs.DataDirect.PackV7DallassAns.ChannelsCount">
-            <summary>
-            Количество ключей доступа в пакете
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.Packs.DataDirect.PackV7DallassAns.Channels">
-            <summary>
-            Массив параметров ключей доступа
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.Packs.DataDirect.PackV7DallassAsk">
-            <summary>
-            Пакет запроса параметров ключа доступа 4:3:150
-            </summary>
-        </member>
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7FindAns">
             <summary>
             Пакет ответа обнаружения устройства. Моргает светодиодами 4:3:18
@@ -1102,6 +1591,29 @@
             Пакет запроса состояния сухих контактов устройства 4:3:139
             </summary>
         </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7NtpAns">
+            <summary>
+            Пакет ответа состояние NTP сервиса 4:3:8
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.DataDirect.PackV7NtpAns.Epoch">
+            <summary> Начало 1900года в UTC
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.PackV7NtpAns.NetTimeStamp">
+            <summary> Смещение от начала 1900года в UTC
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.PackV7NtpAns.time">
+            <summary>
+            Время как есть. Не пересчитывает с учётом часового пояса.
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7NtpAsk">
+            <summary>
+            Пакет запроса Дай состояние NTP сервиса 4:3:8+128
+            </summary>
+        </member>
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7NVRAMAns">
             <summary>
             Пакет ответа на чтение/запись NVRAN 4:3:1
@@ -1150,6 +1662,16 @@
         <member name="P:LKDSFramework.Packs.DataDirect.PackV7NVRAMAsk.NVRAM">
             <summary>
             Массив данных NVRAM
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7OtkAns">
+            <summary>
+            Сервис ОТК 4:3:10
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7OtkAsk">
+            <summary>
+            Пакет запроса состояния устройства КТОТЫ 4:3:128
             </summary>
         </member>
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7OutputAns">
@@ -1280,6 +1802,46 @@
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7RestartAsk">
             <summary>
             Пакет запроса на чтение/запись NVRAN 4:3:129
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7SecureAns">
+            <summary>
+            Пакет ответа с параметрами ключа доступа 4:3:22
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.DataDirect.PackV7SecureAns.SecKey.Num">
+            <summary>
+            Код ключа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.DataDirect.PackV7SecureAns.SecKey.Type">
+            <summary>
+            Тип ключа
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.DataDirect.PackV7SecureAns.SecKey.Lenght">
+            <summary>
+            Длинна Ключ
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.DataDirect.PackV7SecureAns.SecKey.Iter">
+            <summary>
+            Последний считаный индекс
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.PackV7SecureAns.ChannelsCount">
+            <summary>
+            Количество ключей доступа в пакете
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.PackV7SecureAns.Channels">
+            <summary>
+            Массив параметров ключей доступа
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.Packs.DataDirect.PackV7SecureAsk">
+            <summary>
+            Пакет запроса параметров ключа доступа 4:3:150
             </summary>
         </member>
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7ShadowDevAns">
@@ -1620,6 +2182,11 @@
             Время создания активной прошивки
             </summary>
         </member>
+        <member name="P:LKDSFramework.Packs.DataDirect.PackV7WhoAns.IAPDeviceInfo">
+            <summary>
+            Полная структура IAP описателя устройства
+            </summary>
+        </member>
         <member name="T:LKDSFramework.Packs.DataDirect.PackV7WhoAsk">
             <summary>
             Пакет запроса состояния устройства КТОТЫ 4:3:128
@@ -1723,253 +2290,245 @@
         <member name="M:LKDSFramework.Packs.PackV7Internal.TryDecryptMe(System.Byte[],LKDSFramework.CriptKey[])">
             
         </member>
-        <member name="T:LKDSFramework.RealDeviceV7">
+        <member name="T:LKDSFramework.Packs.PackV7SingleInfoUnitState">
             <summary>
-            Объект - базовое устротсво.
+            10 Единый информационный пакет о состоянии лифта (ЛБ v7)
             </summary>
         </member>
-        <member name="T:LKDSFramework.RealDeviceV7.SubDevClassType">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit0">
             <summary>
-            Тип данных - Тип подустройства
+            .0	Вставлен сервисный ключ (Режим ТО)
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.Dev">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit1">
             <summary>
-            Входы концентратора
+            .1	Был рестарт блока
+            </summary>    
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit2">
+            <summary>
+            .2	Многократный реверс дверей
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.Reserv">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit3">
             <summary>
-            Резерв
+            .3	Проникновение в МП
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.USBVoice">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit4">
             <summary>
-            USB-Voice Converter
+            .4	Отсутствует напряжение в цепи управления
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.VTerm">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit5">
             <summary>
-            Видео-информационная панель
+            .5	Зажата кнопка СТОП в кабине лифта
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PU">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit6">
             <summary>
-            ПУ
+            .6	Не закрыта дверь кабины
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.DPU">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag1.bit7">
             <summary>
-            ЭПУ
+            .7	Разрыв цепи безопасности
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.WiFiEx">
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit0">
+             <summary>
+            .0	Не сработал датчик УБ
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit1">
+             <summary>
+            .1	КЗ цепи безопасности
+             </summary>0
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit2">
+             <summary>
+            .2	Вызов диспетчера
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit3">
+             <summary>
+            .3	Несанкционированное движение кабины
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit4">
+             <summary>
+            .4	Авария главного привода по УКСЛ
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit5">
+             <summary>
+            .5	Авария привода дверей
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit6">
+             <summary>
+            .6	Проникновение в шахту
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag2.bit7">
+             <summary>
+            .7	Неисправность УБ
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit0">
+             <summary>
+            .0	Аварийная блокировка лифта
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit1">
+             <summary>
+            .1	Открыто МП
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit2">
+             <summary>
+            .2	Кабина стоит между этажами
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit3">
+             <summary>
+            .3	Не сработал датчик ДК
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit4">
+             <summary>
+            .4	Нет связи со станцией управления
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit5">
+             <summary>
+            .5	Главный привод включен
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit6">
+             <summary>
+            .6	Бит пользователя
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag3.bit7">
+             <summary>
+            .7	Перемычка пускателя
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit0">
+             <summary>
+            .0	Блокировка РД без РКД
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit1">
+             <summary>
+            .1	Уточнение вызова диспетчера: 0-кабина / 1 - МП
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit2">
+             <summary>
+            .2	Неисправность тракта ГГС кабины лифта
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit3">
+             <summary>
+            .3	Резерв
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit4">
+             <summary>
+            .4	Резерв
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit5">
+             <summary>
+            .5	Резерв
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit6">
+             <summary>
+            .6	Резерв
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag4.bit7">
+             <summary>
+            .7	Резерв
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit0">
+             <summary>
+            .0	Состояние USER1
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit1">
+             <summary>
+            .1	Состояние USER2
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit2">
+             <summary>
+            .2	Состояние USER3
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit3">
+             <summary>
+            .3	Состояние USER4
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit4">
+             <summary>
+            .4	Резервное питание ЛБ
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit5">
+             <summary>
+            .5	Переменное напряжение в ЦБ
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit6">
+             <summary>
+            .6	Пожарная опасность
+             </summary>
+        </member>
+        <member name="F:LKDSFramework.Packs.SingleInfoUnitState.Messages.ClassicElevatorState.StateFlag5.bit7">
+             <summary>
+            .7	Неисправна батареяпитания
+             </summary>
+        </member>
+        <member name="T:LKDSFramework.Serial.DriverV7Serial">
             <summary>
-            WiFi удлинитель
+            Реализует в себе автомат работы с оборудованием на протоколе V7 через последовательный порт
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ASK16">
+        <member name="P:LKDSFramework.Serial.DriverV7Serial.DevicesCount">
             <summary>
-            АСК16
+            Возвращает количество устройств в автомате
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ATU2">
+        <member name="M:LKDSFramework.Serial.DriverV7Serial.Init(System.String,System.UInt32)">
             <summary>
-            АТУ8x2
+            Инициализация порта
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.APU1">
+        <member name="M:LKDSFramework.Serial.DriverV7Serial.Close">
             <summary>
-            АПУ1
+            Принудительно остановить автомат и закрыть порт
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.API1">
+        <member name="T:LKDSFramework.Serial.SerialPortInfo">
             <summary>
-            АПИ1
+            Возвращает подробную информацию о последовательных портах в системе
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PKD2sec">
+        <member name="M:LKDSFramework.Serial.SerialPortInfo.GetCOMPortsInfo">
             <summary>
-            ПКД2х2 sec
+            Возвращает список описателей последовательных портов системы
             </summary>
         </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PKD16sec">
+        <member name="M:LKDSFramework.Serial.SerialPortInfo.GetCOMPortInfo(System.String)">
             <summary>
-            ПКД2х16 sec
+            Возвращает описатель последовательного порта по имени
             </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PUAP">
-            <summary>
-            ПУАП
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ARV">
-            <summary>
-            АРВ8x6
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ALI">
-            <summary>
-            АЛИ
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ATS">
-            <summary>
-            АТС4х4
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.AMB1">
-            <summary>
-            АМБ1
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.APU2">
-            <summary>
-            АПУ2
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.Tmp1">
-            <summary>
-            Не известно
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.Tmp2">
-            <summary>
-            Не известно
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.AHL">
-            <summary>
-            АШЛ6х6
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ID">
-            <summary>
-            ПКД1х2
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PKD2">
-            <summary>
-            ПКД2х2
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PKD16">
-            <summary>
-            ПКД2х16
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.CANBrige">
-            <summary>
-            РШК
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.ARI">
-            <summary>
-            АРИ8x6
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.PLC1">
-            <summary>
-            ПЛС1
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClassType.None">
-            <summary>
-            Не опеределен
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.RealDeviceV7.DevClassType">
-            <summary>
-            Тип данных - Тип устройства
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.RealDeviceV7.RestartCodeType">
-            <summary>
-            Тип данных - код рестарта
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.RealDeviceV7.ServicesType">
-            <summary>
-            Тип данных - поддерживаемые сервисы. флаги
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.DevClass">
-            <summary>
-            Класс устройтсва
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SubDevClass">
-            <summary>
-            Класс подустройства
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.Services">
-            <summary>
-            Поддерживаемые устройством сервисы
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.RestartCode">
-            <summary>
-            Код рестарта
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.RestartIndex">
-            <summary>
-            Индекс последнего рестарта
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SoftVer">
-            <summary>
-            Программная версия
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.AppVer">
-            <summary>
-            Аппаратная версия
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.isOnline">
-            <summary>
-            Есть ли устройство на связи
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.SoftDate">
-            <summary>
-            Последнее обновление
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.LTime">
-            <summary>
-            Последнее обновление
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.RealDeviceV7.Tag">
-            <summary>
-            Таг
-            </summary>
-        </member>
-        <member name="P:LKDSFramework.RealDeviceV7.isBattary">
-            <summary>
-            Есть ли у текущего устройства батарея
-            </summary>
-        </member>
-        <member name="M:LKDSFramework.RealDeviceV7.Clone(LKDSFramework.RealDeviceV7)">
-            <summary>
-            Полная независимая копия объекта
-            </summary>
-            <param name="data">объект для копирования</param>
-        </member>
-        <member name="M:LKDSFramework.RealDeviceV7.CloneLight(LKDSFramework.RealDeviceV7)">
-            <summary>
-            Копирует только оперативные данные об устройстве
-            </summary>
-            <param name="data">объект для копирования</param>
-        </member>
-        <member name="M:LKDSFramework.RealDeviceV7.Clone">
-            <summary>
-            Возвращает полную копию текущего объекта
-            </summary>
-            <returns>объект-копия</returns>
         </member>
         <member name="M:LKDSFramework.SettingsHelper.LoadFromFile``1(``0@,System.String)">
             <summary>
@@ -1988,76 +2547,6 @@
             <param name="opt"></param>
             <param name="filename"></param>
             <param name="iscripted"></param>
-            <returns></returns>
-        </member>
-        <member name="T:LKDSFramework.ShadowDevice">
-            <summary>
-            Объект - теневое КАН устройство, наследник подустройства. EQ
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.ShadowDevice.ShadowWorkModeType">
-            <summary>
-            Рабочий режим теневого устройства. Флаги
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.ShadowDevice.ShadowStateType">
-            <summary>
-            Состояния теневого устройства. Флаги
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.ShadowDevice.ShadowInputAndConfigType">
-            <summary>
-            Конфигурация теневого устройства. Флаги
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.ShadowDevice.WorkMode">
-            <summary>
-            Текущий режим работы
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.ShadowDevice.State">
-            <summary>
-            Состояние
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.ShadowDevice.InputAndConfigure">
-            <summary>
-            Конфигурация и входа устройтсва
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.ShadowDevice.cpuid">
-            <summary>
-            Идентификатор процессора
-            </summary>
-        </member>
-        <member name="M:LKDSFramework.ShadowDevice.Clone(LKDSFramework.ShadowDevice)">
-            <summary>
-            Полная независимая копия объекта
-            </summary>
-            <param name="data">объект для копирования</param>
-        </member>
-        <member name="M:LKDSFramework.ShadowDevice.CloneLight(LKDSFramework.SubDeviceV7)">
-            <summary>
-            Копирует только оперативные данные об устройстве
-            </summary>
-            <param name="data">объект для копирования</param>
-        </member>
-        <member name="M:LKDSFramework.ShadowDevice.Clone">
-            <summary>
-            Возвращает полную копию текущего объекта
-            </summary>
-            <returns>объект-копия</returns>
-        </member>
-        <member name="M:LKDSFramework.ShadowDevice.ToString">
-            <summary>
-            Возвращает строку-описатель. Формат shadow_класс подустр(адрес на шине)
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LKDSFramework.ShadowDevice.ToLogString">
-            <summary>
-            Возвращает строку-описатель для ведения лога
-            </summary>
             <returns></returns>
         </member>
         <member name="M:LKDSFramework.StringHelper.GetArrayFromHEXString(System.String)">
@@ -2112,6 +2601,76 @@
             <param name="Num"> номер бита</param>
             <returns></returns>
         </member>
+        <member name="T:LKDSFramework.SubDevices.SubShadow">
+            <summary>
+            Объект - теневое КАН устройство, наследник подустройства. EQ
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.SubDevices.SubShadow.ShadowWorkModeType">
+            <summary>
+            Рабочий режим теневого устройства. Флаги
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.SubDevices.SubShadow.ShadowStateType">
+            <summary>
+            Состояния теневого устройства. Флаги
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.SubDevices.SubShadow.ShadowInputAndConfigType">
+            <summary>
+            Конфигурация теневого устройства. Флаги
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.SubDevices.SubShadow.WorkMode">
+            <summary>
+            Текущий режим работы
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.SubDevices.SubShadow.State">
+            <summary>
+            Состояние
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.SubDevices.SubShadow.InputAndConfigure">
+            <summary>
+            Конфигурация и входа устройтсва
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.SubDevices.SubShadow.cpuid">
+            <summary>
+            Идентификатор процессора
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.SubDevices.SubShadow.Clone(LKDSFramework.VirtualDeviceV7)">
+            <summary>
+            Полная независимая копия объекта
+            </summary>
+            <param name="_data">объект для копирования</param>
+        </member>
+        <member name="M:LKDSFramework.SubDevices.SubShadow.CloneLight(LKDSFramework.VirtualDeviceV7)">
+            <summary>
+            Копирует только оперативные данные об устройстве
+            </summary>
+            <param name="_data">объект для копирования</param>
+        </member>
+        <member name="M:LKDSFramework.SubDevices.SubShadow.Clone">
+            <summary>
+            Возвращает полную копию текущего объекта
+            </summary>
+            <returns>объект-копия</returns>
+        </member>
+        <member name="M:LKDSFramework.SubDevices.SubShadow.ToString">
+            <summary>
+            Возвращает строку-описатель. Формат shadow_класс подустр(адрес на шине)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LKDSFramework.SubDevices.SubShadow.ToLogString">
+            <summary>
+            Возвращает строку-описатель для ведения лога
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LKDSFramework.SubDeviceV7">
             <summary>
             Объект - КАН устройство, наследник базового. EQ
@@ -2123,29 +2682,9 @@
             </summary>
             <param name="dev"></param>
         </member>
-        <member name="T:LKDSFramework.SubDeviceV7.StateFlagsType">
+        <member name="F:LKDSFramework.SubDeviceV7.Parrent">
             <summary>
-            Тип данных - Флаги особых состояний
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.SubDeviceV7.BattaryFlagsType">
-            <summary>
-            Тип данных - Флаги состояний батареи
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.SubDeviceV7.Callbacks">
-            <summary>
-            Список подписок устройства
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.SubDeviceV7.drv">
-            <summary>
-            Связывание с драйвером
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.SubDeviceV7.UnitID">
-            <summary>
-            Идентификатор устройства
+            Ссылка на объект предок
             </summary>
         </member>
         <member name="F:LKDSFramework.SubDeviceV7.CanID">
@@ -2153,32 +2692,17 @@
             Идентификатор устройства
             </summary>
         </member>
-        <member name="F:LKDSFramework.SubDeviceV7.FlagsSpecialState">
-            <summary>
-            Флаги специальных состояний
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.SubDeviceV7.BatValue">
-            <summary>
-            % аккумулятора
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.SubDeviceV7.BatState">
-            <summary>
-            Состояние батареи
-            </summary>
-        </member>
-        <member name="M:LKDSFramework.SubDeviceV7.Clone(LKDSFramework.SubDeviceV7)">
+        <member name="M:LKDSFramework.SubDeviceV7.Clone(LKDSFramework.VirtualDeviceV7)">
             <summary>
             Полная независимая копия объекта
             </summary>
-            <param name="data">объект для копирования</param>
+            <param name="_data">объект для копирования</param>
         </member>
-        <member name="M:LKDSFramework.SubDeviceV7.CloneLight(LKDSFramework.SubDeviceV7)">
+        <member name="M:LKDSFramework.SubDeviceV7.CloneLight(LKDSFramework.VirtualDeviceV7)">
             <summary>
             Копирует только оперативные данные об устройстве
             </summary>
-            <param name="data">объект для копирования</param>
+            <param name="_data">объект для копирования</param>
         </member>
         <member name="M:LKDSFramework.SubDeviceV7.Clone">
             <summary>
@@ -2198,19 +2722,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LKDSFramework.SubDeviceV7.SetCallback(LKDSFramework.Packs.DataCallback.PackV7CallbacksSetAsk.CallbackOptions)">
+        <member name="M:LKDSFramework.SubDeviceV7.SendCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
             <summary>
             Установить подписку для текущего устройства или подустройства
             </summary>
             <param name="call">уникальный номер подписки</param>
-            <returns></returns>
+            <returns>номер в пуле пакетов</returns>
         </member>
         <member name="M:LKDSFramework.SubDeviceV7.SendPack(LKDSFramework.Packs.PackV7)">
             <summary>
             Отправить пакет для текущего устройства или подустройства
             </summary>
             <param name="pack">паект к отправке</param>
-            <returns></returns>
+            <returns>номер в пуле пакетов</returns>
         </member>
         <member name="T:LKDSFramework.Union16">
             <summary>
@@ -2225,6 +2749,332 @@
         <member name="T:LKDSFramework.Union64">
             <summary>
             Структура для работы с 8байтовыми данными
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7">
+            <summary>
+            Объект - базовое устротсво.
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7.StateFlagsType">
+            <summary>
+            Тип данных - Флаги особых состояний
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7.SubDevClassType">
+            <summary>
+            Тип данных - Тип подустройства
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.Dev">
+            <summary>
+            Входы концентратора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.SubDev">
+            <summary>
+            Резерв
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.USBVoice">
+            <summary>
+            USB-Voice Converter
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.VTerm">
+            <summary>
+            Видео-информационная панель
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PU">
+            <summary>
+            ПУ
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.DPU">
+            <summary>
+            ЭПУ
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.WiFiEx">
+            <summary>
+            WiFi удлинитель
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ASK16">
+            <summary>
+            АСК16
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ATU2">
+            <summary>
+            АТУ8x2
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.APU1">
+            <summary>
+            АПУ1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.API1">
+            <summary>
+            АПИ1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PKD2sec">
+            <summary>
+            ПКД2х2 sec
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PKD16sec">
+            <summary>
+            ПКД2х16 sec
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PUAP">
+            <summary>
+            ПУАП
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ARV">
+            <summary>
+            АРВ8x6
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ALI">
+            <summary>
+            АЛИ
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ATS">
+            <summary>
+            АТС4х4
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.AMB1">
+            <summary>
+            АМБ1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.AZO1">
+            <summary>
+            АМБ1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.APU2">
+            <summary>
+            АПУ2
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.Tmp1">
+            <summary>
+            Не известно
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.Tmp2">
+            <summary>
+            Не известно
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.AHL">
+            <summary>
+            АШЛ6х6
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ID">
+            <summary>
+            ПКД1х2
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PKD2">
+            <summary>
+            ПКД2х2
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PKD16">
+            <summary>
+            ПКД2х16
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.CANBrige">
+            <summary>
+            РШК
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.ARI">
+            <summary>
+            АРИ8x6
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.PLC1">
+            <summary>
+            ПЛС1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.RIP">
+            <summary>
+            ПЛС1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClassType.None">
+            <summary>
+            Не опеределен
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7.DevClassType">
+            <summary>
+            Тип данных - Тип устройства
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7.RestartCodeType">
+            <summary>
+            Тип данных - код рестарта
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.VirtualDeviceV7.ServicesType">
+            <summary>
+            Тип данных - поддерживаемые сервисы. флаги
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.Channels">
+            <summary>
+            Список каналов устройства
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.Callbacks">
+            <summary>
+            Список подписок устройства
+            </summary>
+        </member>
+        <member name="E:LKDSFramework.VirtualDeviceV7.OnCallbackChangeState">
+            <summary>
+            Событие изменения состояния подписки
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.DevClass">
+            <summary>
+            Класс устройтсва
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SubDevClass">
+            <summary>
+            Класс подустройства
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.Services">
+            <summary>
+            Поддерживаемые устройством сервисы
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.RestartCode">
+            <summary>
+            Код рестарта
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.RestartIndex">
+            <summary>
+            Индекс последнего рестарта
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SoftVer">
+            <summary>
+            Программная версия
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.DevVer">
+            <summary>
+            Аппаратная версия
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.isOnline">
+            <summary>
+            Есть ли устройство на связи
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.SoftDate">
+            <summary>
+            Последнее обновление
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.LTime">
+            <summary>
+            Последнее обновление
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.FlagsSpecialState">
+            <summary>
+            Флаги специальных состояний
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.VirtualDeviceV7.isBattary">
+            <summary>
+            Есть ли у текущего устройства батарея
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.VirtualDeviceV7.drv">
+            <summary>
+            Связывание с драйвером
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.Clone(LKDSFramework.VirtualDeviceV7)">
+            <summary>
+            Полная независимая копия объекта
+            </summary>
+            <param name="data">объект для копирования</param>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.CloneLight(LKDSFramework.VirtualDeviceV7)">
+            <summary>
+            Копирует только оперативные данные об устройстве
+            </summary>
+            <param name="data">объект для копирования</param>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.Clone">
+            <summary>
+            Возвращает полную копию текущего объекта
+            </summary>
+            <returns>объект-копия</returns>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.SendCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
+            <summary>
+            Установить подписку для текущего устройства или подустройства
+            </summary>
+            <param name="call">уникальный номер подписки</param>
+            <returns>номер в пуле пакетов</returns>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.SendPack(LKDSFramework.Packs.PackV7)">
+            <summary>
+            Отправить пакет для текущего устройства или подустройства
+            </summary>
+            <param name="pack">паект к отправке</param>
+            <returns>номер в пуле пакетов</returns>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.CallStateCallbackAsunc(LKDSFramework.Packs.DataCallback.CallbackOptions)">
+            <summary>
+            Отправляет событие об изменении состояния асинхронно
+            </summary>
+            <param name="opt"></param>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.FindCallbaсk(LKDSFramework.Packs.DataCallback.CallbackOptions)">
+            <summary>
+            Осуществляет поиск подписки в пуле подписок
+            </summary>
+            <param name="sPack">параметры подписки</param>
+            <returns>подписка</returns>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.AddCallback(LKDSFramework.Packs.DataCallback.CallbackOptions)">
+            <summary>
+            Проверить пул подписок, внести изменения 
+            </summary>
+            <param name="subscript"></param>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.CleanCallbacks">
+            <summary>
+            Осуществляет очистку подписок - удаляет устаревшие и помеченые к удалению
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.VirtualDeviceV7.ResetCallBacks">
+            <summary>
+            Обнулет все данные подписок, чтобы заново их установить
             </summary>
         </member>
     </members>

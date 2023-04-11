@@ -1,4 +1,6 @@
-﻿using Multiprog7.Classes;
+﻿using LKDSFramework;
+using Multiprog7.Classes;
+using Multiprog7.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +23,9 @@ namespace Multiprog7.Windows
     /// </summary>
     public partial class WndDetail : Window
     {
-        public WndDetail(ObservableCollection<FirmwareAnalysis> data)
+        public WndDetail()
         {
             InitializeComponent();
-
-            LvUpdateInfo.ItemsSource = data;
         }
         private void dragMe(object sender, MouseButtonEventArgs e)
         {
@@ -39,6 +39,17 @@ namespace Multiprog7.Windows
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+
+        public void UpdateData(ref ObservableCollection<FirmwareAnalysis> data)
+        {
+            var SelectedUnitID = data[0].Unit;
+
+            DeviceV7 dev = PageMain.LocalDeviceV7s.FirstOrDefault(p => (p as DeviceV7).UnitID == SelectedUnitID) as DeviceV7;
+
+            LbLiftTitle.Content = $"{dev} {dev.IP} / {dev.UnitID}";
+            LvAnalysisInfo.ItemsSource = data;
         }
     }
 }

@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Multiprog7.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="323" d:DesignWidth="800"
+      Style="{StaticResource PageFont}"
       Title="PageAddLiftBlock">
 
     <Border x:Name="MainBorder" BorderBrush="#EAEEF1"  Background="White" CornerRadius="15" BorderThickness="1" Width="502" Height="227">
@@ -69,8 +70,8 @@
                             </Style>
                         </Button.Resources>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock VerticalAlignment="Center" FontSize="14">
-                                Добавить Лб <Separator Width="220" Visibility="Hidden" />
+                            <TextBlock VerticalAlignment="Center" FontSize="14" >
+                                Добавить Лб <Separator Width="250" Visibility="Hidden" />
                             </TextBlock>
                             <TextBlock FontSize="25" VerticalAlignment="Center" Margin="0 0 0 8">+</TextBlock>
                         </StackPanel>
@@ -84,7 +85,7 @@
                         <DataTemplate>
                             <Border Height="44"  BorderThickness="1" CornerRadius="10" BorderBrush="#EAEEF1" Background="White" Margin="0 10 0 0">
                                 <Grid Width="388">
-                                    <TextBlock Text="Лб7 WIF АСУД " VerticalAlignment="Center" FontSize="14"  Foreground="#486FEF" Margin="10 0">
+                                    <TextBlock Text="{Binding LiftTitle}" VerticalAlignment="Center" FontSize="14"  Foreground="#486FEF" Margin="14 0">
                                     </TextBlock>
                                     <Button x:Name="BtnSaveCurrentLBBat" Background="{x:Null}" BorderThickness="0" HorizontalAlignment="Right" Margin="0 0 40 0" Click="BtnSaveCurrentLBBat_Click">
                                         <Path

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Multiprog7.Pages"
       xmlns:fwCode="clr-namespace:Multiprog7.Classes"
       xmlns:Microsoft_Windows_Themes="clr-namespace:Multiprog7.Model"
-
+      Style="{StaticResource PageFont}"
       mc:Ignorable="d" 
       Loaded="Page_Loaded"
       d:DesignHeight="672" d:DesignWidth="1024"
@@ -64,18 +64,18 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
                                 Style="{StaticResource LbHeader}" 
-                                Width="76" Margin="10,20" Height="28"
+                                Width="83" Margin="0,20,10,20" Height="28"
                                 
                                 />
                             <Label 
                                 x:Name="LbRemainingTime"
                                 FontWeight="Bold"
                                 Grid.Column="1"
-                                Content="2ч 12мин"
+                                Content="0 сек"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 FontSize="14"
-                                Foreground="#486FEF" Height="28" Margin="0,20" Width="79"/>
+                                Foreground="#486FEF" Height="28" Margin="-15,20"/>
                         </Grid>
                         <!-- Content="{Binding TimeView}" -->
 
@@ -110,8 +110,8 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" HorizontalAlignment="Left" Width="204" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="91*"/>
+                                <ColumnDefinition Width="113*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock 
                                 Grid.Column="0"
@@ -120,7 +120,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Visibility="Visible"
-                                Foreground="#4F4F4F" Height="36"  Width="81" Margin="0,16">
+                                Foreground="#4F4F4F" Height="36"  Width="90" Margin="0,16">
                                     Обновлений
                                     <LineBreak/>
                                     доступно
@@ -141,14 +141,14 @@
                                 x:Name="LbDevCount"
                                 Grid.Column="1"
                                 FontWeight="Bold"
-                                Content="999"
+                                Content="0"
                                 FontFamily="/Resources/#Inter"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 FontSize="40"
-                                Foreground="#6FCF97"/>
+                                Foreground="#6FCF97" Height="58" Margin="9,5,14,5" Width="90"/>
                         </Grid>
 
                         <Button
@@ -216,7 +216,7 @@
                     <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Header detail-->
                 <Grid Grid.Row="0">
                     <Label 
@@ -310,20 +310,11 @@
                           SelectionChanged="LvAnalysisInfo_SelectionChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding CAN}">
-                                <GridViewColumn.HeaderContainerStyle>
-                                    <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                        <Setter Property="Content" Value="CAN"/>
-                                        <Setter Property="Width" Value="50"/>
-                                    </Style>
-                                </GridViewColumn.HeaderContainerStyle>
-                            </GridViewColumn>
-
                             <GridViewColumn DisplayMemberBinding="{Binding Title}">
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                         <Setter Property="Content" Value="Наименование"/>
-                                        <Setter Property="Width" Value="150"/>
+                                        <Setter Property="Width" Value="176"/>
                                     </Style>
                                 </GridViewColumn.HeaderContainerStyle>
                             </GridViewColumn>
@@ -332,7 +323,7 @@
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                         <Setter Property="Content" Value="Прошивка"/>
-                                        <Setter Property="Width" Value="150"/>
+                                        <Setter Property="Width" Value="100"/>
                                     </Style>
                                 </GridViewColumn.HeaderContainerStyle>
                             </GridViewColumn>
@@ -341,7 +332,7 @@
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                         <Setter Property="Content" Value="Дата"/>
-                                        <Setter Property="Width" Value="80"/>
+                                        <Setter Property="Width" Value="100"/>
                                     </Style>
                                 </GridViewColumn.HeaderContainerStyle>
                             </GridViewColumn>
@@ -350,15 +341,15 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Path></Path>
-                                            <Label Content="{Binding StatusTxt}"/>
+                                            <Path Data="{Binding PathData}" Fill="{Binding PathFill}" Margin="0 7"></Path>
+                                            <Label Content="{Binding StatusTxt}" Foreground="{Binding PathFill}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                         <Setter Property="Content" Value="Тип ошибки"/>
-                                        <Setter Property="Width" Value="150"/>
+                                        <Setter Property="Width" Value="177"/>
 
                                     </Style>
                                 </GridViewColumn.HeaderContainerStyle>
@@ -410,7 +401,7 @@
                         </Style>
                     </ListView.Resources>
                 </ListView>
-                
+
                 <ListView x:Name="LvUpdateInfo" Visibility="Hidden"
                     BorderThickness="0" 
                     Margin="10 5"
@@ -551,7 +542,7 @@
 
             </Grid.ColumnDefinitions>
 
-            
+
             <Grid Grid.Column="3" Height="194" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="54"></RowDefinition>

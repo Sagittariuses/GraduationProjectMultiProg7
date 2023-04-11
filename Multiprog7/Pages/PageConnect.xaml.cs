@@ -1,4 +1,5 @@
 ﻿using LKDSFramework;
+using Multiprog7.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -27,115 +28,75 @@ namespace Multiprog7.Pages
     {
 
         public event EventHandler MyEvent;
-
-        bool CancelFlag = false;
-        int Counter = 0;
-        char FirstNum = ' ';
-
-        string FlagCloud = "-cloud", FlagLU = "-lu", FlagPass = "-pass";
-        List<string> ParamsList = new List<string>();
-        DriverV7 Driver = new DriverV7();
-
-
+        DriverV7Net Driver = new DriverV7Net();
+        ArgsToConnect argsToConnect;
         protected void OnMyEvent()
         {
             if (this.MyEvent != null)
                 this.MyEvent(this, EventArgs.Empty);
         }
-        public PageConnect()
-        {
-            
-            InitializeComponent();
-        }
+        public PageConnect() => InitializeComponent();
 
-        private void TBLU_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckDigit(e);
-        }
+        private void TBLU_PreviewTextInput(object sender, TextCompositionEventArgs e) => CheckDigit(e);
 
-        private void MaskTbIP_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var ip = MaskTbIP.Text.Split(',');
+        private void TBCloud_PreviewTextInput(object sender, TextCompositionEventArgs e) => CheckDigit(e);
 
-            try
-            {
-                foreach (var item in ip)
-                    if (Convert.ToInt32(item) > 255)
-                    {
-                        CancelFlag = true;
-                        return;
-                    }
-            }
-            catch { }
-            
-
-        }
-        private void MaskTbIP_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {   
-            if(CancelFlag)
-            {
-                e.Handled = true;
-                CancelFlag = false;
-            }
-
-            CheckDigit(e);
-        }
-        
-
-        private void TBCloud_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckDigit(e);
-
-        }
-
-        private void TBCan_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckDigit(e);
-        }
+        private void TBCan_PreviewTextInput(object sender, TextCompositionEventArgs e) => CheckDigit(e);
 
         private void BtnConnectLB_Click(object sender, RoutedEventArgs e)
         {
-            // Формировать параметры подключения
-
-            PageAddLiftBlock.LiftBlocks.Add(new string[2] { "a", "b" });
-            this.OnMyEvent();
-            NavigationService.GoBack();
-            return;
-
             if (PboxFirst.Password == PboxSecond.Password)
-            {
-                
                 try
                 {
-                    var Devices = DeviceV7.FromArgs(App.Args);
+                    argsToConnect = new ArgsToConnect(null,null,true,TBLU.Text,PboxFirst.Password, null,TBCan.Text, null);
+
+                    for (int i = 0; i < argsToConnect.Args.Count; i++)
+                        argsToConnect.Args[i] = argsToConnect.Args[i].Trim().Replace(" ", "");
+
+                    Driver.OnDevChange += new DeviceV7.OnDevChangeDelegate(Driver_onDevChange);
+
+                    if (!Driver.Init())
+                        return;
+
+                    var Devices = DeviceV7.FromArgs(argsToConnect.Args.ToArray());
                     Driver.AddDevice(ref Devices[0]);
-
-                    NavigationService.GoBack();
-
-
+                    Devices[0].WorkMode = DeviceV7.WorkModeType.LogExtra;
                 }
                 catch
                 {
                     MessageBox.Show("Невернные параметры подключения");
                 }
-            }
             else
                 MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        
-
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        private void Driver_onDevChange(DeviceV7 dev)
         {
-            NavigationService.GoBack();
+            LiftBlocksInfo liftBlocksInfo = new LiftBlocksInfo()
+            {
+                Connect = argsToConnect,
+                LiftTitle = dev.ToString()
+            };
+            Dispatcher.Invoke(() =>
+            {
+                PageAddLiftBlock.LiftBlocks.Add(liftBlocksInfo);
+                this.OnMyEvent();
+                try 
+                {
+                    NavigationService.GoBack();
+                }
+                catch { }
+            });
+            Driver.Close();
         }
 
-        private void CheckDigit(TextCompositionEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e) => NavigationService.GoBack();
+
+
+        private void CheckDigit(TextCompositionEventArgs e) 
         {
             if (!Char.IsDigit(e.Text, 0))
-            {
                 e.Handled = true;
-            }
         }
     }
 }

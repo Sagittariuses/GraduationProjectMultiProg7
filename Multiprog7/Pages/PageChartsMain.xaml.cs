@@ -31,34 +31,22 @@ namespace Multiprog7.Pages
             "#E5A119",
             "#27AE60",
             "#E6E3E2",
-
-            //errors hex
-            "#9BB1DB",
-            "#1D499F",
-            "#BB6BD9",
-            "#2D9CDB",
-            "#515151",
-            "#C81862",
-            "#4774CB",
         };
         public PageMain pageMain;
         public static ChartsCodes currentChart;
 
-        int Errors, Outdates, Actuals;
+        static int Errors, Outdates, Actuals;
 
-        public PageCharts(ObservableCollection<FirmwareAnalysis> data)
+        public PageCharts()
         {
             InitializeComponent();
-            Errors = data.Count(p => p.StatusCode == FirmwareStatus.Error);
-            Outdates = data.Count(p => p.StatusCode == FirmwareStatus.Outdated);
-            Actuals = data.Count(p => p.StatusCode == FirmwareStatus.Actual);
 
             FullCollection = new SeriesCollection
             {
                 new PieSeries
                 {
                     Title = "Errors",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Errors) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[0]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -68,7 +56,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "OutdatedFw ",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Outdates) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[1]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -77,7 +65,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "ActualFw",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Actuals) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[2]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -91,7 +79,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "Errors",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Errors) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[0]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -101,7 +89,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "Fill ",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(data.Count()) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -111,12 +99,10 @@ namespace Multiprog7.Pages
             };
             OutdatedFwCollection = new SeriesCollection
             {
-             
-
                 new PieSeries
                 {
                     Title = "OutdatedFw ",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Outdates) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[1]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -126,7 +112,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "Fill ",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(data.Count()) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
@@ -138,7 +124,7 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "ActualFw",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(Actuals) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush)new BrushConverter().ConvertFrom(ColorsHEX[2]),
                     Margin = new Thickness(-15 - 15 - 15 - 15),
                     StrokeThickness = 0,
@@ -148,14 +134,14 @@ namespace Multiprog7.Pages
                 new PieSeries
                 {
                     Title = "Fill ",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(data.Count()) },
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
                     StrokeThickness = 0,
                     Stroke = (Brush)new BrushConverter().ConvertFrom(ColorsHEX[3]),
                 },
             };
-            UpdateData();
+            UpdateData_FilterChart();
         }
 
         public SeriesCollection FullCollection { get; set; }
@@ -165,10 +151,9 @@ namespace Multiprog7.Pages
 
         private void BtnChartByType_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageChartsByType());
+            if (currentChart != ChartsCodes.Full)
+                NavigationService.Navigate(new PageChartsByType());
         }
-
-      
 
         private void BtnFullChart_Click(object sender, RoutedEventArgs e)
         {
@@ -197,7 +182,7 @@ namespace Multiprog7.Pages
             pageMain.UpdateAnalysisData(PageMain.currentFilt, currentChart);
             ChangeCurrentChart(currentChart);
         }
-        private void UpdateData()
+        private void UpdateData_FilterChart()
         {
             ChartFull.Series = FullCollection;
             ChartErrors.Series = ErrorsCollection;
@@ -212,6 +197,69 @@ namespace Multiprog7.Pages
             LbOutdates.Content = Actuals;
 
         }
+
+        public void UpdateLabelData(int errros, int outdates, int actuals)
+        {
+            LbActuals.Content = actuals;
+            LbActualsFull.Content = actuals;
+            LbErrors.Content = errros;
+            LbErrorsFull.Content = errros;
+            LbOutdates.Content = outdates;
+            LbOutdatesFull.Content = outdates;
+        }
+
+        public void UpdateActualData()
+        {
+            Errors = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Error);
+            Outdates = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Outdated);
+            Actuals = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Actual);
+
+            try
+            {
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateLabelData(Errors, Outdates, Actuals);
+                    foreach (var series in FullCollection)
+                        if (series.Title == "Errors")
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Errors;
+                        else if (series.Title == "OutdatedFw")
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Outdates;
+                        else
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Actuals;
+
+                    foreach (var series in ErrorsCollection)
+                        if (series.Title == "Errors")
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Errors;
+                        else
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = PageMain.OcAllDevFwData.Count - Errors;
+
+                    foreach (var series in OutdatedFwCollection)
+                        if (series.Title == "OutdatedFw")
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Outdates;
+                        else
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = PageMain.OcAllDevFwData.Count - Outdates;
+
+                    foreach (var series in ActualFwCollection)
+                        if (series.Title == "ActualFw")
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = Actuals;
+                        else
+                            foreach (var observable in series.Values.Cast<ObservableValue>())
+                                observable.Value = PageMain.OcAllDevFwData.Count - Actuals;
+                });
+            }   
+            catch { }
+           
+        }
+
         private void ChangeCurrentChart(ChartsCodes code)
         {
             if (code == ChartsCodes.Full)
