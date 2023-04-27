@@ -77,7 +77,7 @@
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="Прошивка"/>
-                                    <Setter Property="Width" Value="176"/>
+                                    <Setter Property="Width" Value="150"/>
                                 </Style>
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>
@@ -86,7 +86,7 @@
                             <GridViewColumn.HeaderContainerStyle>
                                 <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
                                     <Setter Property="Content" Value="Дата"/>
-                                    <Setter Property="Width" Value="176"/>
+                                    <Setter Property="Width" Value="150"/>
                                 </Style>
                             </GridViewColumn.HeaderContainerStyle>
                         </GridViewColumn>

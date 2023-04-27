@@ -73,9 +73,8 @@ namespace Multiprog7.Pages
             List<string> list = new List<string>();
 
             foreach (var item in DevsByFwStatus)
-            {
                 list.Add(item.DevType.ToString());
-            }
+
             list = list.Distinct().ToList();
 
             int i = 0;
@@ -109,7 +108,7 @@ namespace Multiprog7.Pages
                             Stroke = (Brush)new BrushConverter().ConvertFrom(FillColor),
                         },
                     },
-                    DevType = item,
+                    DevType = item != "0055" ? item : "ЛБ",
                     DevCount = count,
                     DevColour = ColorsHEX[i]
                 };

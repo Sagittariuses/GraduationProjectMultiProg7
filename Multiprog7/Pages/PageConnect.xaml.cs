@@ -72,11 +72,8 @@ namespace Multiprog7.Pages
 
         private void Driver_onDevChange(DeviceV7 dev)
         {
-            LiftBlocksInfo liftBlocksInfo = new LiftBlocksInfo()
-            {
-                Connect = argsToConnect,
-                LiftTitle = dev.ToString()
-            };
+            LiftBlocksInfo liftBlocksInfo = new LiftBlocksInfo(dev, argsToConnect);
+            
             Dispatcher.Invoke(() =>
             {
                 PageAddLiftBlock.LiftBlocks.Add(liftBlocksInfo);

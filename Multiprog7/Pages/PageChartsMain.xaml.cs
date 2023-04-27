@@ -55,7 +55,7 @@ namespace Multiprog7.Pages
 
                 new PieSeries
                 {
-                    Title = "OutdatedFw ",
+                    Title = "OutdatedFw",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[1]),
                     Margin = new Thickness(-15 - 15 -15 -15),
@@ -88,7 +88,7 @@ namespace Multiprog7.Pages
 
                 new PieSeries
                 {
-                    Title = "Fill ",
+                    Title = "Fill",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
@@ -101,7 +101,7 @@ namespace Multiprog7.Pages
             {
                 new PieSeries
                 {
-                    Title = "OutdatedFw ",
+                    Title = "OutdatedFw",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[1]),
                     Margin = new Thickness(-15 - 15 -15 -15),
@@ -111,7 +111,7 @@ namespace Multiprog7.Pages
 
                 new PieSeries
                 {
-                    Title = "Fill ",
+                    Title = "Fill",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
@@ -133,7 +133,7 @@ namespace Multiprog7.Pages
 
                 new PieSeries
                 {
-                    Title = "Fill ",
+                    Title = "Fill",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
                     Fill = (Brush) new BrushConverter().ConvertFrom(ColorsHEX[3]),
                     Margin = new Thickness(-15 - 15 -15 -15),
@@ -210,12 +210,27 @@ namespace Multiprog7.Pages
 
         public void UpdateActualData()
         {
-            Errors = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Error);
-            Outdates = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Outdated);
-            Actuals = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Actual);
-
             try
             {
+
+
+                /*Console.WriteLine($"----------------{PageMain.OcAllDevFwData.Distinct().ToList().Count}----------------");
+                foreach (var item in PageMain.OcAllDevFwData.Distinct().ToList())
+                {
+                    Console.WriteLine($"Unit: {item.Unit}, Can: {item.CAN}, DevType: {item.DevType} ,Ver: {item.Version}");
+                }
+                Console.WriteLine($"|||||||||||{PageMain.OcAllDevFwData.Count}||||||||||||||||");
+                foreach (var item in PageMain.OcAllDevFwData)
+                {
+                    Console.WriteLine($"Unit: {item.Unit}, Can: {item.CAN}, DevType: {item.DevType} ,Ver: {item.Version}");
+                }
+                Console.WriteLine("--------------------------------");*/
+
+
+
+                Errors =  PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Error);
+                Outdates = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Outdated);
+                Actuals = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Actual);
 
                 Dispatcher.Invoke(() =>
                 {

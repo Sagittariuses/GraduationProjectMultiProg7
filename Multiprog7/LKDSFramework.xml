@@ -955,79 +955,74 @@
             <param name="enemState">флаги к удалению</param>
             <returns></returns>
         </member>
-        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate">
+        <member name="T:LKDSFramework.FWUpdate.FWCheckForUpdate">
             <summary>
             Автомат принятия решений по обновлению устройства
             </summary>
         </member>
-        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.UpdateOption">
-            <summary>
-            Опции рассчета обновления
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.Options">
-            <summary>
-            Опции анализатора
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult">
-            <summary>
-            Типа результата работы анализатора
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.newFirmwareIsNotFound">
-            <summary>
-            Обновление не найдено
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.newFirmwareIsFound">
-            <summary>
-            Необходимо обновление
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.justManualUpdate">
-            <summary>
-            Возможно только ручное обновление
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.filePathIsEmpty">
-            <summary>
-            не передан список файлов
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.argumentHasError">
-            <summary>
-            в переданных аргументах находятся ошибки
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.CheckResult.currentFirmwareIsNewr">
-            <summary>
-            Прошивка в устройвте новее, чем в файле
-            </summary>
-        </member>
-        <member name="T:LKDSFramework.FWUpdate.CheckForUpdate.FirmwareAndResult">
+        <member name="T:LKDSFramework.FWUpdate.FWCheckForUpdate.FirmwareAndResult">
             <summary>
             Тип результат работы
             </summary>
         </member>
-        <member name="F:LKDSFramework.FWUpdate.CheckForUpdate.Results">
+        <member name="T:LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption">
             <summary>
-            Результат работы анализатора
+            Опции рассчета обновления
             </summary>
         </member>
-        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.SetFilePath(System.String[])">
+        <member name="F:LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption.NotZipFilePrior">
             <summary>
-            Задаёт список файлов прошивок или zip-архив с ними. Требует обработки исключений!
+            Приоритет обновления у файлов вне зип архива. Будет взята первая попавшаяся прошивка не из ZIP
             </summary>
         </member>
-        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.Analyze(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType)">
+        <member name="F:LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption.ignoryAnyImplements">
+            <summary>
+            Заменять исполнения на указыаней в файле для этого типа БЕЗ исключений
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption.ignoryImplements">
+            <summary>
+            Заменять исполнения на указыаней в файле для этого типа, кроме устройтсв со спец исполнением 15
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption.ignoreVersion">
+            <summary>
+            Игнорировать версию в устройстве - будут залиты все подходящие прошивки
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.FWCheckForUpdate.CheckResult">
+            <summary>
+            Типа результата работы анализатора
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.#ctor(System.String[])">
+            <summary>
+            Создает объект чекер, опционально- с всеми настройками
+            </summary>
+            <param name="filePaths">Задаёт список файлов прошивок или zip-архив с ними. Если в списке 2 прошивки для одного устрйоства, то обновляться будет на самую новую, согласно опциям</param>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.SetFilePath(System.String[])">
+            <summary>
+            Задаёт список файлов прошивок или zip-архив с ними. Если в списке > 1 прошивки для одного устрйоства, то обновляться будет на самую новую, согласно опциям
+            </summary>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.Analyze(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType,LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption)">
             <summary>
             Анализирует пакет ИАПА и выносит вердикт по прошивкам устройства
             </summary>
-            <param name="unitInfo">данные из пакета</param>
+            <param name="unitInfo">данные описателя устрйоства из пакета</param>
+            <param name="Options">Опции рассчета обновления</param>
             <returns> што нужно прошивать</returns>
         </member>
-        <member name="M:LKDSFramework.FWUpdate.CheckForUpdate.parseFimwares(System.String[])">
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.FindDesriptByIFDAndOpt(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.ProcessorStateStruct,LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption)">
+            <summary>
+            Поиск подходящих прошивок
+            </summary>
+            <param name="proc"></param>
+            <param name="Options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.ParseFiles(System.String[])">
             <summary>
             Разбор файлов прошивок из архива или из файлов
             </summary>
@@ -1035,70 +1030,389 @@
             <returns></returns>
             <exception cref="T:System.IO.FileNotFoundException"></exception>
         </member>
-        <member name="T:LKDSFramework.FWUpdate.FirmewareFileDescriptor">
-            <summary>
-            Содержит разбор данных из фаила прошивок
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.ifdVersion">
-            <summary>
-            Версия IAP Firmware Descriptor
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.seek">
-            <summary>
-            Смещение следующего дескриптора
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.deviceDescription">
-            <summary>
-            Описнание устрйоства
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.dateOfDescriptorCreated">
-            <summary>
-            Дата создания дескриптора. Переведено в unix time
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.hardwareRequired">
-            <summary>
-            Требуемая аппаратная часть BOOT
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.softwareRequired">
-            <summary>
-            Требуемая программная часть BOOT
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.programmSize">
-            <summary>
-            Длина программы фактическая из дескриптора
-            </summary>
-        </member>
-        <member name="F:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.descriptor">
-            <summary>
-            Описательная часть программы из Дескриптора
-            </summary>
-        </member>
-        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.IFD.isItNewer(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType,LKDSFramework.FWUpdate.CheckForUpdate.UpdateOption)">
+        <member name="M:LKDSFramework.FWUpdate.FWCheckForUpdate.CheckForMath(LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPProcessorAns.IAPDeviceInfoType,LKDSFramework.FWUpdate.FWFileDescriptor.IFDData,LKDSFramework.FWUpdate.FWCheckForUpdate.UpdateOption)">
             <summary>
             Проверяет является ли файл новее, чем описание из IAPDeviceInfoType. Выбрасывает исключение из нижнего уровня.
             </summary>
         </member>
-        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.getFileDescriptorOrNull">
+        <member name="T:LKDSFramework.FWUpdate.FWFileDescriptor">
             <summary>
-            Получение описания прошивки из файла
-            </summary>
-            <returns>Описание</returns>
-        </member>
-        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.getFirmware">
-            <summary>
-            Возвращает из файла только ту часть, котора относится к прошивке т.е. без всех дескрипторов.
+            Содержит разбор данных из фаила прошивок
             </summary>
         </member>
-        <member name="M:LKDSFramework.FWUpdate.FirmewareFileDescriptor.isFirstVersionBigger(LKDSFramework.Union32,LKDSFramework.Union32)">
+        <member name="T:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData">
             <summary>
-            Проверяет является ли первоя версия больше второй. Выбрасывает исключение.
+            Дескриптор IFD является обязательным при использовании открытых дескрипторов 
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.None">
+            <summary>
+            Не вычислялось
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.Ok">
+            <summary>
+            Все нормально
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.LenNotEnough">
+            <summary>
+            Не достаточная длинна массива данных для разбора  64
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.NoPrefix">
+            <summary>
+            В данных нет префикса 
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.CRCBad">
+            <summary>
+            СЦС не совпало
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.NextPtrBad">
+            <summary>
+            Ошибка формата указателя на след прошивку - должно быть кратоно 32
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.DateBad">
+            <summary>
+            Дата отличается более чем на 20 лет от текущей - подозрительно
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.ifdFormatBad">
+            <summary>
+            Не известная версия формата IFD. поддержка только версии 1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.IFDState.ProgLenZerro">
+            <summary>
+            Длинна программы = 0
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.SizeDesc">
+            <summary>
+            Размерность Описания
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.Size">
+            <summary>
+            Размерность структуры
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.Pref">
+            <summary>
+            Последовательность, говорящая, что перед нами прошивка с описателем. ASCI = "IFD"
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.ifdVersion">
+            <summary>
+            Версия дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.NextIFDOffset">
+            <summary>
+            Смещение следующего дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.Processor">
+            <summary>
+            Описнание устрйоства
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.CreateDate">
+            <summary>
+            Дата создания дескриптора. Переведено в unix time
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.CRC">
+            <summary>
+            CRC дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.AppReq">
+            <summary>
+            Требуемая аппаратная часть BOOT
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.SoftReq">
+            <summary>
+            Требуемая программная часть BOOT
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.ProgSize">
+            <summary>
+            Длина программы фактическая без заголовка и выравнивания (32байта)
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.Descriptor">
+            <summary>
+            Описательная часть программы из Дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFDData.State">
+            <summary>
+            Состояние дескриптора
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData">
+            <summary>
+            содержит изменяемые данные NVRAM- энергонезависимой памяти
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.None">
+            <summary>
+            Не вычислялось
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.Ok">
+            <summary>
+            Все нормально
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.LenNotEnough">
+            <summary>
+            Не достаточная длинна массива данных для разбора  288
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.NoPrefix">
+            <summary>
+            В данных нет префикса 
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.CRCBad">
+            <summary>
+            СЦС не совпало
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.NextPtrBad">
+            <summary>
+            Ошибка формата указателя на след прошивку - должно быть кратоно 32
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.DateBad">
+            <summary>
+            Дата отличается более чем на 20 лет от текущей - подозрительно
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.nvcFormatBad">
+            <summary>
+            Не известная версия формата NVC. поддержка только версии 1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCState.TotalSizeError">
+            <summary>
+            Длинна записей не соответсвуюет длинне массива на разборе
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCBlock.Num">
+            <summary>
+            порядковый номер в разборе
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCBlock.Addr">
+            <summary>
+            Адрес в NVRAM
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NVCBlock.Data">
+            <summary>
+            Данные
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.SizeDesc">
+            <summary>
+            Размерность Описания
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.HeaderSize">
+            <summary>
+            Минимальная размерность структуры
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.Pref">
+            <summary>
+            Последовательность, говорящая, что перед нами прошивка с описателем. ASCI = "NVC"
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.nvcVersion">
+            <summary>
+            Версия дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.CRC">
+            <summary>
+            CRC дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.TotalSize">
+            <summary>
+            Итоговый размер блока NVC
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.NextNVCOffset">
+            <summary>
+            Смещение следующего дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.CreateDate">
+            <summary>
+            Дата создания дескриптора. Переведено в unix time
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.Descriptor">
+            <summary>
+            Описательная часть программы из Дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVCData.State">
+            <summary>
+            Состояние дескриптора
+            </summary>
+        </member>
+        <member name="T:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData">
+            <summary>
+            содержит изменяемые данные таблицы параметров ЛБ.
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.None">
+            <summary>
+            Не вычислялось
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.Ok">
+            <summary>
+            Все нормально
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.LenNotEnough">
+            <summary>
+            Не достаточная длинна массива данных для разбора  160 + 256 + 64
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.NoPrefix">
+            <summary>
+            В данных нет префикса 
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.CRCBad">
+            <summary>
+            СЦС не совпало
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.NextPtrBad">
+            <summary>
+            Ошибка формата указателя на след прошивку - должно быть кратоно 32
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.DateBad">
+            <summary>
+            Дата отличается более чем на 20 лет от текущей - подозрительно
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPState.ifdFormatBad">
+            <summary>
+            Не известная версия формата LUP. поддержка только версии 1
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Size">
+            <summary>
+            Размерность структуры
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.SizeHeader">
+            <summary>
+            Размерность заголовка
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.SizeDesc">
+            <summary>
+            Размерность Описания
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.SizeMask_Param">
+            <summary>
+            Размерность Маски
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Pref">
+            <summary>
+            Последовательность, говорящая, что перед нами прошивка с описателем. ASCI = "LUP"
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.LUPVersion">
+            <summary>
+            Версия дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.NextLUPOffset">
+            <summary>
+            Смещение следующего дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.CreateDate">
+            <summary>
+            Дата создания дескриптора. Переведено в unix time
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Param">
+            <summary>
+            Параметры
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Mask">
+            <summary>
+            Маска
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Default">
+            <summary>
+            Дефолт
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.CRC">
+            <summary>
+            CRC дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.Descriptor">
+            <summary>
+            Описательная часть программы из Дескриптора
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUPData.State">
+            <summary>
+            Состояние дескриптора
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.FWUpdate.FWFileDescriptor.isOk">
+            <summary>
+            Корректно ли заполнены структуры данных
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.IFD">
+            <summary>
+            Данные дескриптора IAP Firmware Descriptor (IFD)
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.NVC">
+            <summary>
+            Данные дескриптора NV_CONFIG (NVC)
+            </summary>
+        </member>
+        <member name="F:LKDSFramework.FWUpdate.FWFileDescriptor.LUP">
+            <summary>
+            Данные дескриптора LU_PARAM (LUP)
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.FWUpdate.FWFileDescriptor.fileContent">
+            <summary>
+            Файил с дескрипторами
+            </summary>
+        </member>
+        <member name="P:LKDSFramework.FWUpdate.FWFileDescriptor.fileFW">
+            <summary>
+            Тело прошивки
             </summary>
         </member>
         <member name="P:LKDSFramework.IdeaEngine.isInit">

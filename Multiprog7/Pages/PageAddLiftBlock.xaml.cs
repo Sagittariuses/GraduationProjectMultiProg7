@@ -41,7 +41,10 @@ namespace Multiprog7.Pages
         {
             try
             {
-                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Aaaa_bbbb.bat");
+                if (!Directory.Exists(BatDirectory))
+                    Directory.CreateDirectory(BatDirectory);
+
+                var path = Path.Combine(BatDirectory, $"LB_count{LiftBlocks.Count}.bat");
 
                 LiftBlocksInfo.SaveFullBat(path, LiftBlocks);
             }
@@ -53,7 +56,6 @@ namespace Multiprog7.Pages
 
         private void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
-            App.Args = new string[] {"-cloud", "-lu54172", "-pass123456789q" };
             NavigationService.Navigate(new PageMain());
         }
 
@@ -70,9 +72,11 @@ namespace Multiprog7.Pages
         {
             try
             {
+                if (!Directory.Exists(BatDirectory))
+                    Directory.CreateDirectory(BatDirectory);
                 var selectedLiftBlock = LViewLbForConnect.SelectedItem as LiftBlocksInfo;
 
-                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{selectedLiftBlock.LiftTitle}_{selectedLiftBlock.Connect.LuId}.bat");
+                var path = Path.Combine(BatDirectory, $"{selectedLiftBlock}_{selectedLiftBlock.UnitID}.bat");
                 
                 selectedLiftBlock.SaveCurrentLbBat(path, (LViewLbForConnect.SelectedItem as LiftBlocksInfo).Connect);
             }

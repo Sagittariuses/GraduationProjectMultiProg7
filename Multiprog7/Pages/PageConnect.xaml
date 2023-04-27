@@ -83,7 +83,6 @@
                 <TextBox x:Name="TBLU"
                          HorizontalAlignment="Center" 
                          Height="44" 
-                         Text="54172"
                          Grid.Row="1" 
                          Grid.Column="0"
                          TextWrapping="Wrap" 
@@ -143,7 +142,6 @@
                        FontSize="16" Margin="24,0,0,60"/>
                 <PasswordBox
                          x:Name="PboxFirst"
-                         Password="123456789q"
                          HorizontalAlignment="Center" 
                          Height="44" 
                          Grid.Row="2" 
@@ -173,7 +171,6 @@
                 <PasswordBox
                          x:Name="PboxSecond"
                          HorizontalAlignment="Center" 
-                         Password="123456789q"
                          Height="44" 
                          Grid.Row="3" 
                          Grid.Column="0"

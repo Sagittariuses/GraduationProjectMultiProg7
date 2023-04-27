@@ -24,6 +24,7 @@ namespace Multiprog7
 
             MainWindow wnd = new MainWindow();
             Args = e.Args;
+
             wnd.Show();
             // запускать разные окна (наверное) в зависимости от набора аргументов
         }
