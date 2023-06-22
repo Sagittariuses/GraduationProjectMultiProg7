@@ -429,87 +429,7 @@ namespace Multiprog7.Pages
         {
             #region comment  whoans
 
-            if (RebootingTheDeviceFlag)
-            {
-                if (ActualFWNum == ListOfFWList.Count - 1)
-                {
-                    RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
-                    return;
-                }
-                else
-                {
-                    RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
-                    return;
-                }
-
-            }
-
-            if (Step == 5)
-            {
-                lock (this)
-                {
-                    OcOutdatesDevs[DevUpdate - 1].StatusTxt = "Обновлён";
-                    OcOutdatesDevs[DevUpdate - 1].PathDataState = FirmwareUpdateStatus.Updated.GetNameOfEnum();
-                    Step = 1;
-                    EmptyPageFound = false;
-                    SelectedPageNum = 2;
-                    PagesCount = 0;
-                    ActualPageNum = 0;
-                    FirstWriteFlag = true;
-                    ActualFWNum = DevUpdate;
-                    counter = 0;
-                    if (DevUpdate >= OcOutdatesDevs.Count)
-                    {
-                        UpdateFlag = false;
-                        Dispatcher.Invoke(() =>
-                        {
-
-                            LbProgressPercent.Content = "0%";
-                            LbState.Content = "Анализ";
-                            LbRemainingTime.Content = "0 сек";
-
-                            Driver.OnDevChange += new DeviceV7.OnDevChangeDelegate(Driver_OnDevChange);
-                            OcLiftFwData.Clear();
-                            OcAllDevFwData.Clear();
-                            OcLiftFwDataUpdate.Clear();
-                            timer.Tick += new EventHandler(timerTick);
-
-                            LvAnalysisInfo.Visibility = Visibility.Visible;
-                            LvUpdateInfo.Visibility = Visibility.Hidden;
-
-
-                            foreach (var dev in Driver.Devices)
-                            {
-                                var keys = dev.SubDevices.Keys;
-                                var Unit = dev.UnitID;
-
-                                dev.SendPack(new PackV7WhoAsk());
-
-                                foreach (var key in keys)
-                                    SendWhoAsk(Unit, key);
-                            }
-                            PbMain.Value = 0;
-                            AnalyzeFlag = true;
-                        });
-                        return;
-                    }
-                    SendStateAsk(OcOutdatesDevs[DevUpdate].Unit, (byte)OcOutdatesDevs[DevUpdate].CAN);
-                    return;
-                }
-                    
-            }
-
-            if (pack is LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns)
-            {
-                LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns PackActiveAns = pack as LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns;
-                if (PackActiveAns.Error == LKDSFramework.Packs.DataDirect.PackV7IAPService.IAPErrorType.NoError)
-                {
-                    Console.WriteLine("/-/-/-/-/-/ Done /-/-/-/-/-/");
-                    RebootingTheDeviceFlag = true;
-                }
-                else
-                    Console.WriteLine("/-/-/-/-/-/ Error /-/-/-/-/-/");
-            }
+            
 
 
             if (pack is PackV7WhoAns)
@@ -657,6 +577,90 @@ namespace Multiprog7.Pages
 
                 #endregion
             }
+
+            if (RebootingTheDeviceFlag)
+            {
+                if (ActualFWNum == ListOfFWList.Count - 1)
+                {
+                    RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
+                    return;
+                }
+                else
+                {
+                    RebootingTheDeviceFlag = !RebootingTheDeviceFlag;
+                    return;
+                }
+
+            }
+
+            if (Step == 5)
+            {
+                lock (this)
+                {
+                    OcOutdatesDevs[DevUpdate - 1].StatusTxt = "Обновлён";
+                    OcOutdatesDevs[DevUpdate - 1].Status = FirmwareUpdateStatus.Updated;
+                    OcOutdatesDevs[DevUpdate - 1].PathDataState = FirmwareUpdateStatus.Updated.GetNameOfEnum();
+                    Step = 1;
+                    EmptyPageFound = false;
+                    SelectedPageNum = 2;
+                    PagesCount = 0;
+                    ActualPageNum = 0;
+                    FirstWriteFlag = true;
+                    ActualFWNum = DevUpdate;
+                    counter = 0;
+                    if (DevUpdate >= OcOutdatesDevs.Count)
+                    {
+                        UpdateFlag = false;
+                        Dispatcher.Invoke(() =>
+                        {
+
+                            LbProgressPercent.Content = "0%";
+                            LbState.Content = "Анализ";
+                            LbRemainingTime.Content = "0 сек";
+
+                            Driver.OnDevChange += new DeviceV7.OnDevChangeDelegate(Driver_OnDevChange);
+                            OcLiftFwData.Clear();
+                            OcAllDevFwData.Clear();
+                            OcLiftFwDataUpdate.Clear();
+                            timer.Tick += new EventHandler(timerTick);
+
+                            LvAnalysisInfo.Visibility = Visibility.Visible;
+                            LvUpdateInfo.Visibility = Visibility.Hidden;
+
+
+                            foreach (var dev in Driver.Devices)
+                            {
+                                var keys = dev.SubDevices.Keys;
+                                var Unit = dev.UnitID;
+
+                                dev.SendPack(new PackV7WhoAsk());
+
+                                foreach (var key in keys)
+                                    SendWhoAsk(Unit, key);
+                            }
+                            PbMain.Value = 0;
+                            AnalyzeFlag = true;
+                        });
+                        return;
+                    }
+                    SendStateAsk(OcOutdatesDevs[DevUpdate].Unit, (byte)OcOutdatesDevs[DevUpdate].CAN);
+                    return;
+                }
+
+            }
+
+            if (pack is LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns)
+            {
+                LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns PackActiveAns = pack as LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPActiveAns;
+                if (PackActiveAns.Error == LKDSFramework.Packs.DataDirect.PackV7IAPService.IAPErrorType.NoError)
+                {
+                    Console.WriteLine("/-/-/-/-/-/ Done /-/-/-/-/-/");
+                    RebootingTheDeviceFlag = true;
+                }
+                else
+                    Console.WriteLine("/-/-/-/-/-/ Error /-/-/-/-/-/");
+            }
+
             if (pack is LKDSFramework.Packs.DataDirect.PackV7IAPService)
             {
                 lock (this)
@@ -754,7 +758,7 @@ namespace Multiprog7.Pages
                                     Dispatcher.Invoke(new Action(() =>
                                     {
                                         PbMain.Value++;
-                                        ElapsedTime(_updateStartTime, OcOutdatesDevs[DevUpdate].CAN);
+                                        ElapsedTime(_updateStartTime);
                                     }));
 
                                     return;
@@ -764,7 +768,7 @@ namespace Multiprog7.Pages
                                     Dispatcher.Invoke(new Action(() =>
                                     {
                                         PbMain.Value++;
-                                        ElapsedTime(_updateStartTime, pack.CanID);
+                                        ElapsedTime(_updateStartTime);
                                     }));
                                     FirmwareLoadPackAns = pack as LKDSFramework.Packs.DataDirect.IAPService.PackV7IAPWriteAns;
                                     Console.WriteLine("Offset: " + FirmwareLoadPackAns.Offset);
@@ -802,7 +806,7 @@ namespace Multiprog7.Pages
                                         {
 
                                             PbMain.Value++;
-                                            ElapsedTime(_updateStartTime, pack.CanID);
+                                            ElapsedTime(_updateStartTime);
 
                                         }));
                                         SendLastFragFlag = false;
@@ -1150,56 +1154,75 @@ namespace Multiprog7.Pages
             SendStateAsk(OcOutdatesDevs[DevUpdate].Unit, (byte)OcOutdatesDevs[DevUpdate].CAN);
         }
 
-        void ElapsedTime(DateTime startTime, int can)
+        void ElapsedTime(DateTime startTime)
         {
-            var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
-            var allTimeFordownloading = elapsedTime * PbMain.Maximum / PbMain.Value;
-            var remainingTime = allTimeFordownloading - elapsedTime;
-            var ts = TimeSpan.FromSeconds(remainingTime);
-
-            
-
-
-            for (int i = 1; i <= OcOutdatesDevs.Count; i++)
+            Dispatcher.Invoke(() => 
             {
-                if (OcOutdatesDevs[i - 1].Status == FirmwareUpdateStatus.Updated)
-                    continue;
+                var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
+                var allTimeFordownloading = elapsedTime * PbMain.Maximum / PbMain.Value;
+                var remainingTime = allTimeFordownloading - elapsedTime;
+                var ts = TimeSpan.FromSeconds(remainingTime);
 
-                var allTimeFordownloadingLocal = 0.00;
-              
 
-                for (int j = 0; j < i; j++)
+                var step = 0;
+                foreach (var item in OcOutdatesDevs)
+                    if (item.Status == FirmwareUpdateStatus.Updated)
+                        step++;
+
+                var speedLoad = PbMain.Value / elapsedTime;
+                for (int i = step; i < OcOutdatesDevs.Count; i++)
                 {
-                    allTimeFordownloadingLocal += elapsedTime * ListOfFWList[j].Count / PbMain.Value;
+                    var fragsCount = ListOfFWList[step].Count;
+                    for (int j = 1; j <= i; j++)
+                    {
+                        fragsCount += ListOfFWList[j].Count;
+                    }
+
+                    var LocalTs = TimeSpan.FromSeconds((fragsCount - PbMain.Value) / speedLoad);
+
+                    if (i == OcOutdatesDevs.Count - 1)
+                        LocalTs = ts;
+
+                   /* var allTimeFordownloadingLocal = elapsedTime * ListOfFWList[step].Count / PbMain.Value;
+                    var remainingTimeLocal = allTimeFordownloadingLocal - elapsedTime;
+                    var time = remainingTime - remainingTimeLocal;
+                    var LocalTs = TimeSpan.FromSeconds(time);
+                    
+
+                    if (i == OcOutdatesDevs.Count-1)
+                    {
+                        LocalTs = TimeSpan.FromSeconds(remainingTime);
+                    }*/
+
+                    if (LocalTs.Hours > 0)
+                    {
+                        OcOutdatesDevs[i].StatusTxt = $"{statustxt} {LocalTs.Hours}ч {LocalTs.Minutes}мин";
+                    }
+                    else if (LocalTs.Minutes > 0)
+                    {
+                        OcOutdatesDevs[i].StatusTxt = $"{statustxt} {LocalTs.Minutes}мин {LocalTs.Seconds}сек";
+                    }
+                    else if (LocalTs.Seconds < 0)
+                    {
+                        OcOutdatesDevs[i].StatusTxt = $"Активация...";
+                    }
+                    else
+                    {
+                        OcOutdatesDevs[i].StatusTxt = $"{statustxt} {LocalTs.Seconds} сек";
+                    }
                 }
-                var remainingTimeLocal = allTimeFordownloadingLocal - elapsedTime;
-                var LocalTs = TimeSpan.FromSeconds(remainingTime - remainingTimeLocal);
 
-                if (i == OcOutdatesDevs.Count)
-                {
-                    LocalTs = TimeSpan.FromSeconds(remainingTime);
-                }
-
-
-
-
-                if (LocalTs.Hours > 0)
-                    OcOutdatesDevs[i - 1].StatusTxt = $"{statustxt} {LocalTs.Hours}ч {LocalTs.Minutes}мин";
-                else if (LocalTs.Minutes > 0)
-                    OcOutdatesDevs[i - 1].StatusTxt = $"{statustxt} {LocalTs.Minutes}мин {LocalTs.Seconds}сек";
+                if (ts.Hours > 0)
+                    LbRemainingTime.Content = $"{ts.Hours}ч {ts.Minutes}мин";
+                else if (ts.Minutes > 0)
+                    LbRemainingTime.Content = $"{ts.Minutes}мин {ts.Seconds}сек";
                 else
-                    OcOutdatesDevs[i - 1].StatusTxt = $"{statustxt} {LocalTs.Seconds} сек";
-            }
-
-            if (ts.Hours > 0)
-                LbRemainingTime.Content = $"{ts.Hours}ч {ts.Minutes}мин";
-            else if (ts.Minutes > 0)
-                LbRemainingTime.Content = $"{ts.Minutes}мин {ts.Seconds}сек";
-            else
-                LbRemainingTime.Content = $"{ts.Seconds} сек";
+                    LbRemainingTime.Content = $"{ts.Seconds} сек";
 
 
-            LbProgressPercent.Content = Convert.ToInt32(PbMain.Value * 100 / PbMain.Maximum) + "%";
+                LbProgressPercent.Content = Convert.ToInt32(PbMain.Value * 100 / PbMain.Maximum) + "%";
+            });
+            
         }
 
         byte[] FindAndReadFWFromZip(string entry, string pathZip)

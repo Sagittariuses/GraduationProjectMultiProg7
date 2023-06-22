@@ -40,6 +40,7 @@ namespace Multiprog7.Classes
         public string PathData { get; set; }
         public string PathFill { get; set; }
 
+
         public FirmwareUpdate(int id, FirmwareAnalysis firmwareAnalysis, string statusTxt, FirmwareUpdateStatus status, string pathDataSate)
         {
             ID = id;

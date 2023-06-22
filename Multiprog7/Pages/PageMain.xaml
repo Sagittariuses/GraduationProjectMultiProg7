@@ -469,8 +469,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Path Data="{Binding PathDataState}" Fill="#6FCF97" Margin="0 7"></Path>
-                                            <Label Content="{Binding StatusTxt}" Foreground="#6FCF97"/>
+                                            <Path Data="{Binding PathDataState}" Fill="#6FCF97" Margin="0 4"></Path>
+                                            <Label Content="{Binding StatusTxt}" Foreground="#6FCF97" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
