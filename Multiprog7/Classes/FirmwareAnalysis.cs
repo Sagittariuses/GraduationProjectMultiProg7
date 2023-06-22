@@ -18,7 +18,7 @@ namespace Multiprog7.Classes
         private string _fwVersion;
         private DateTime _date;
         private string _statustxt;
-        private FirmwareStatus _status;
+        private FirmwareErrorType _status;
 
         public int ID { get; }
         public uint Unit { get; set; }
@@ -29,7 +29,7 @@ namespace Multiprog7.Classes
         public string Version { get => _fwVersion; set => SetProperty(ref _fwVersion, value); }
         public DateTime Date { get => _date; set => SetProperty(ref _date, value); }
         public string StatusTxt { get => _statustxt; set => SetProperty(ref _statustxt, value); }
-        public FirmwareStatus StatusCode { get => _status; set => SetProperty(ref _status, value); }
+        public FirmwareErrorType StatusCode { get => _status; set => SetProperty(ref _status, value); }
         public string PathData { get; set; }
         public string PathFill { get; set; }
 
@@ -39,7 +39,7 @@ namespace Multiprog7.Classes
         {
             if (propertyName == nameof(Version) && newValue is int numb)
             {
-                StatusCode = (FirmwareStatus)numb.CompareTo(Version);
+                StatusCode = (FirmwareErrorType)numb.CompareTo(Version);
             }
             base.SetProperty(ref fieldProperty, newValue, propertyName);
 

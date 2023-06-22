@@ -53,19 +53,19 @@ namespace Multiprog7.Pages
 
             if (PageCharts.currentChart == ChartsCodes.Error)
             {
-                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareStatus.Error));
+                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareErrorType.Error));
                 ChartType = "Ошибки";
                 LabelColor = RedColor;
             }
             else if (PageCharts.currentChart == ChartsCodes.Actual)
             {
-                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareStatus.Actual));
+                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareErrorType.Actual));
                 ChartType = "Актуальные\nпрошивки";
                 LabelColor = GreenColor;
             }
             else if (PageCharts.currentChart == ChartsCodes.Outdate)
             {
-                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareStatus.Outdated));
+                DevsByFwStatus = new ObservableCollection<FirmwareAnalysis>(DevsByFwStatus.Where(p => p.StatusCode == FirmwareErrorType.Outdated));
                 ChartType = "Устаревшие\nпрошивки";
                 LabelColor = YellowColor;
             }

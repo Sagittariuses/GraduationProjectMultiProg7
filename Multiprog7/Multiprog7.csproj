@@ -66,6 +66,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,6 +89,7 @@
     <Compile Include="Classes\ArgsToConnect.cs" />
     <Compile Include="Classes\ChartsByTypes.cs" />
     <Compile Include="Classes\Enums.cs" />
+    <Compile Include="Classes\FirmwareUpdate.cs" />
     <Compile Include="Classes\FirmwareAnalysis.cs" />
     <Compile Include="Classes\FirmwareInfo.cs" />
     <Compile Include="Classes\FWForDevice.cs" />
@@ -115,6 +118,9 @@
     </Compile>
     <Compile Include="Windows\WndSaveXlsx.xaml.cs">
       <DependentUpon>WndSaveXlsx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WndUpdateDetail.xaml.cs">
+      <DependentUpon>WndUpdateDetail.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\PageAddLiftBlock.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\WndSaveXlsx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndUpdateDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

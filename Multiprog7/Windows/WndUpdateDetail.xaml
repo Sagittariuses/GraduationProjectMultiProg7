@@ -1,0 +1,259 @@
+﻿<Window x:Class="Multiprog7.Windows.WndUpdateDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fwCode="clr-namespace:Multiprog7.Classes"
+        xmlns:local="clr-namespace:Multiprog7.Windows"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None" 
+        Icon="/Resources/LogoTitleBar.png"
+        Background="{x:Null}"
+        Style="{StaticResource WinAll}"
+        AllowsTransparency="True" 
+        MouseLeftButtonDown="dragMe"
+        Title="WndDetail" Height="268" Width="753">
+    <Border Grid.Column="0"
+                Grid.Row="5"
+                Width="733"
+                Background="#FFFFFF"
+                CornerRadius="15">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Header detail-->
+            <Grid Grid.Row="0">
+                <Label 
+                    x:Name="LbLiftTitle"
+                    Content="ЛБ7-Canny 192.168.254.255 / 104427"
+                    Style="{StaticResource LbHeader}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20 0">
+                    <Button
+                            x:Name="BtnClose"
+                            Padding ="5 0"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            HorizontalAlignment="Right" Click="BtnClose_Click">
+                        <Path Data="M12.6673 4.94L11.7273 4L8.00065 7.72667L4.27398 4L3.33398 4.94L7.06065 8.66667L3.33398 12.3933L4.27398 13.3333L8.00065 9.60667L11.7273 13.3333L12.6673 12.3933L8.94065 8.66667L12.6673 4.94Z" 
+                              Fill="#828282"/>
+                    </Button>
+                </StackPanel>
+
+                <Grid VerticalAlignment="Bottom" Margin="5 5">
+                    <Border BorderThickness="0,0,0,2" BorderBrush="#EAEEF1" Margin="7 0"/>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#EAEEF1" Padding="0 0 0 0" Margin="6 0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" Opacity="0.3"></DropShadowEffect>
+                        </Border.Effect>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <ListView x:Name="LvUpdateDetailInfo" Visibility="Visible"
+                    BorderThickness="0" 
+                    Margin="10 5"
+                    Background="White" 
+                    BorderBrush="{x:Null}"
+                    Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding CAN}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="CAN"/>
+                                    <Setter Property="Width" Value="50"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Наименование"/>
+                                    <Setter Property="Width" Value="150"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Version}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Прошивка"/>
+                                    <Setter Property="Width" Value="80"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Date}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Дата"/>
+                                    <Setter Property="Width" Value="150"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{Binding PathData}" Fill="{Binding PathFill}" Margin="0 7"></Path>
+                                        <Label Content="{Binding StateTxt}" Foreground="{Binding PathFill}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Состояние"/>
+                                    <Setter Property="Width" Value="177"/>
+
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{Binding PathDataState}" Fill="#6FCF97" Margin="0 7"></Path>
+                                        <Label Content="{Binding StatusTxt}" Foreground="#6FCF97"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Состояние"/>
+                                    <Setter Property="Width" Value="150"/>
+
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                       
+                        <GridViewColumn Header="">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                         Background="{x:Null}"
+                                         BorderThickness="0"
+                                         HorizontalAlignment="Center"  Width="28" >
+                                        <Path Data="M2.16667 0.833374C3.17919 0.833374 4 1.65419 4 2.66671V2.66671C4 3.67923 3.17919 4.50004 2.16667 4.50004L1.83333 4.50004C0.820811 4.50004 8.17969e-07 3.67923 8.66252e-07 2.66671V2.66671C9.14534e-07 1.65419 0.820812 0.833374 1.83333 0.833374L2.16667 0.833374ZM2.16667 8.16671C3.17919 8.16671 4 8.98752 4 10V10C4 11.0126 3.17919 11.8334 2.16667 11.8334L1.83333 11.8334C0.820811 11.8334 4.68278e-07 11.0126 5.1656e-07 10V10C5.64843e-07 8.98752 0.820811 8.16671 1.83333 8.16671L2.16667 8.16671ZM2.16667 15.5C3.17919 15.5 4 16.3209 4 17.3334V17.3334C4 18.3459 3.17919 19.1667 2.16667 19.1667L1.83333 19.1667C0.820811 19.1667 1.18587e-07 18.3459 1.66869e-07 17.3334V17.3334C2.15152e-07 16.3209 0.820811 15.5 1.83333 15.5L2.16667 15.5Z" 
+                                  Fill="#486FEF"/>
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Style.Triggers>
+                                                    <EventTrigger RoutedEvent="Click">
+                                                        <EventTrigger.Actions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
+                                                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                                                    </BooleanAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger.Actions>
+                                                    </EventTrigger>
+                                                </Style.Triggers>
+                                                <Setter Property="ContextMenu">
+                                                    <Setter.Value>
+                                                        <ContextMenu>
+                                                            <ContextMenu.Template>
+                                                                <ControlTemplate>
+                                                                    <Border BorderBrush="#486FEF" BorderThickness="1" Width="150" CornerRadius="10" Background="White">
+                                                                        <StackPanel Orientation="Vertical">
+                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                                <Button Content="CanStatus" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#486FEF"/>
+                                                                            </Border>
+                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                                <Button Content="SmartTool" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
+                                                                            </Border>
+                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                                <Button Content="LB config" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
+                                                                            </Border>
+                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                                <Button Content="MProg" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
+                                                                            </Border>
+                                                                            <Border BorderThickness="0" BorderBrush="#EAEEF1" Padding="0 5 0 0">
+                                                                                <Button Content="Reboot" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
+                                                                            </Border>
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </ContextMenu.Template>
+                                                        </ContextMenu>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
+                                    <Setter Property="Content" Value="Статус"/>
+                                    <Setter Property="Width" Value="150"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Foreground" Value="#486FEF"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="{x:Null}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ErrorType}" Value="{x:Static fwCode:FirmwareErrorType.Error}">
+                                <Setter Property="Foreground" Value="#EB5757"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ErrorType}" Value="{x:Static fwCode:FirmwareErrorType.Actual}">
+                                <Setter Property="Foreground" Value="#6FCF97"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ErrorType}" Value="{x:Static fwCode:FirmwareErrorType.Outdated}">
+                                <Setter Property="Foreground" Value="#F5AB18"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="{x:Static fwCode:FirmwareUpdateStatus.Updated}">
+                                <Setter Property="Foreground" Value="#6FCF97"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="Background" Value="#F2F2F2"/>
+                        <Setter Property="BorderBrush" Value="#F2F2F2"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                    <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.00001*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+
+                                        <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+
+                                            <Track.Thumb>
+                                                <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                            </Track.Thumb>
+                                        </Track>
+
+                                    </Grid>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+                
+            </ListView>
+
+        </Grid>
+
+    </Border>
+</Window>

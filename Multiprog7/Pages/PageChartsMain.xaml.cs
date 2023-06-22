@@ -228,9 +228,9 @@ namespace Multiprog7.Pages
 
 
 
-                Errors =  PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Error);
-                Outdates = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Outdated);
-                Actuals = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareStatus.Actual);
+                Errors =  PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareErrorType.Error);
+                Outdates = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareErrorType.Outdated);
+                Actuals = PageMain.OcAllDevFwData.Count(p => p.StatusCode == FirmwareErrorType.Actual);
 
                 Dispatcher.Invoke(() =>
                 {

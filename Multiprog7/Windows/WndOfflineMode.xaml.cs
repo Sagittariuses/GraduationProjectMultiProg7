@@ -21,6 +21,8 @@ namespace Multiprog7.Windows
     /// </summary>
     public partial class WndOfflineMode : Window
     {
+        OpenFileDialog opd = null;
+
         public WndOfflineMode()
         {
             InitializeComponent();
@@ -31,20 +33,21 @@ namespace Multiprog7.Windows
             WindowState = WindowState.Minimized;
         }
 
-        private void BtnCloseBox_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        private void BtnCloseBox_Click(object sender, RoutedEventArgs e) => Close();
 
         private void BtnUpload_Click(object sender, RoutedEventArgs e)
         {
-            // Разархивировать их куда-то, хз куда
+            if (opd != null)
+            {
+                PageMain.FwArchivePath = opd.FileName;
+                Close();
+            }
         }
 
         private void BtnOpenFolder_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog opd = new OpenFileDialog();
-            opd.Filter = $"Файлы прошивки ({PageMain.FileExt}) | {PageMain.FileExt}";
+            opd = new OpenFileDialog();
+            opd.Filter = $"Архив микропрограмм (*.rar, *.zip)|*.rar;*.zip";
             opd.Title = "Выбор прошивки";
 
             Nullable<bool> result = opd.ShowDialog();
@@ -53,12 +56,8 @@ namespace Multiprog7.Windows
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                LbArchivePath.Content = opd.FileName;
-                PageMain.FwArchivePath= opd.FileName;
-
-
-
-
+                LbArchivePath.ToolTip = opd.FileName;
+                LbArchivePath.Content = $"Выбранный архив: {opd.SafeFileName}";
             }
         }
 

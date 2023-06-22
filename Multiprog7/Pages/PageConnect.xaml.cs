@@ -64,7 +64,7 @@ namespace Multiprog7.Pages
                 }
                 catch
                 {
-                    MessageBox.Show("Невернные параметры подключения");
+                    MessageBox.Show("Неверные параметры подключения");
                 }
             else
                 MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

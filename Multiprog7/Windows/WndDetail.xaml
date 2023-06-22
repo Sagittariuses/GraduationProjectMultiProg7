@@ -116,13 +116,13 @@
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Background" Value="{x:Null}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Error}">
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareErrorType.Error}">
                                 <Setter Property="Foreground" Value="#EB5757"></Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Actual}">
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareErrorType.Actual}">
                                 <Setter Property="Foreground" Value="#6FCF97"></Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareStatus.Outdated}">
+                            <DataTrigger Binding="{Binding StatusCode}" Value="{x:Static fwCode:FirmwareErrorType.Outdated}">
                                 <Setter Property="Foreground" Value="#F5AB18"></Setter>
                             </DataTrigger>
                         </Style.Triggers>
@@ -142,185 +142,6 @@
                                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
 
                                         <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
-                                            <Track.Thumb>
-                                                <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
-                                            </Track.Thumb>
-                                        </Track>
-
-                                    </Grid>
-
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.Resources>
-            </ListView>
-
-            <ListView x:Name="LvUpdateDetailInfo" Visibility="Hidden"
-                    BorderThickness="0" 
-                    Margin="10 5"
-                    Background="White" 
-                    BorderBrush="{x:Null}"
-                    Grid.Row="1">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding CAN}">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="CAN"/>
-                                    <Setter Property="Width" Value="50"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Title}">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Наименование"/>
-                                    <Setter Property="Width" Value="150"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Version}">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Прошивка"/>
-                                    <Setter Property="Width" Value="80"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Date}">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Дата"/>
-                                    <Setter Property="Width" Value="150"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path></Path>
-                                        <Label Content="{Binding StatusTxt}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Состояние"/>
-                                    <Setter Property="Width" Value="150"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path></Path>
-                                        <Label>Status</Label>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Статус"/>
-                                    <Setter Property="Width" Value="150"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                        <GridViewColumn Header="">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                         Background="{x:Null}"
-                                         BorderThickness="0"
-                                         HorizontalAlignment="Center"  Width="28" >
-                                        <Path Data="M2.16667 0.833374C3.17919 0.833374 4 1.65419 4 2.66671V2.66671C4 3.67923 3.17919 4.50004 2.16667 4.50004L1.83333 4.50004C0.820811 4.50004 8.17969e-07 3.67923 8.66252e-07 2.66671V2.66671C9.14534e-07 1.65419 0.820812 0.833374 1.83333 0.833374L2.16667 0.833374ZM2.16667 8.16671C3.17919 8.16671 4 8.98752 4 10V10C4 11.0126 3.17919 11.8334 2.16667 11.8334L1.83333 11.8334C0.820811 11.8334 4.68278e-07 11.0126 5.1656e-07 10V10C5.64843e-07 8.98752 0.820811 8.16671 1.83333 8.16671L2.16667 8.16671ZM2.16667 15.5C3.17919 15.5 4 16.3209 4 17.3334V17.3334C4 18.3459 3.17919 19.1667 2.16667 19.1667L1.83333 19.1667C0.820811 19.1667 1.18587e-07 18.3459 1.66869e-07 17.3334V17.3334C2.15152e-07 16.3209 0.820811 15.5 1.83333 15.5L2.16667 15.5Z" 
-                                  Fill="#486FEF"/>
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Style.Triggers>
-                                                    <EventTrigger RoutedEvent="Click">
-                                                        <EventTrigger.Actions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
-                                                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
-                                                                    </BooleanAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger.Actions>
-                                                    </EventTrigger>
-                                                </Style.Triggers>
-                                                <Setter Property="ContextMenu">
-                                                    <Setter.Value>
-                                                        <ContextMenu>
-                                                            <ContextMenu.Template>
-                                                                <ControlTemplate>
-                                                                    <Border BorderBrush="#486FEF" BorderThickness="1" Width="150" CornerRadius="10" Background="White">
-                                                                        <StackPanel Orientation="Vertical">
-                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
-                                                                                <Button Content="CanStatus" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#486FEF"/>
-                                                                            </Border>
-                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
-                                                                                <Button Content="SmartTool" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
-                                                                            </Border>
-                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
-                                                                                <Button Content="LB config" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
-                                                                            </Border>
-                                                                            <Border BorderThickness="0 0 0 1" BorderBrush="#EAEEF1" Padding="0 5 0 0">
-                                                                                <Button Content="MProg" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
-                                                                            </Border>
-                                                                            <Border BorderThickness="0" BorderBrush="#EAEEF1" Padding="0 5 0 0">
-                                                                                <Button Content="Reboot" HorizontalContentAlignment="Center" BorderThickness="0" Background="{x:Null}" Foreground="#828282"/>
-                                                                            </Border>
-                                                                        </StackPanel>
-                                                                    </Border>
-                                                                </ControlTemplate>
-                                                            </ContextMenu.Template>
-                                                        </ContextMenu>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ManualMode}">
-                                    <Setter Property="Content" Value="Статус"/>
-                                    <Setter Property="Width" Value="150"/>
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="Foreground" Value="#486FEF"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Background" Value="{x:Null}"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.Resources>
-                    <Style TargetType="{x:Type ScrollBar}">
-                        <Setter Property="Background" Value="#F2F2F2"/>
-                        <Setter Property="BorderBrush" Value="#F2F2F2"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ScrollBar}">
-                                    <Grid x:Name="Bg" SnapsToDevicePixels="true">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.00001*"/>
-                                        </Grid.RowDefinitions>
-                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
-
-                                        <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
-
                                             <Track.Thumb>
                                                 <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
                                             </Track.Thumb>
